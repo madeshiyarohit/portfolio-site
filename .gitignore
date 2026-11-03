@@ -4,3 +4,6 @@ dist/
 .DS_Store
 # Full-size original photos stay on your computer; the site uses the optimized copies in public/Assets.
 design-originals/
+
+# Private project guide: stays on this computer only, never pushed to GitHub.
+PROJECT-GUIDE.md
