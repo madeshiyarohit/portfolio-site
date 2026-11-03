@@ -1,0 +1,71 @@
+# Pages CMS settings (https://pagescms.org): the admin panel for adding blog posts and projects.
+# Log in at https://app.pagescms.org with your GitHub account and open this repository.
+media:
+  input: public/Assets/uploads
+  output: /Assets/uploads
+
+content:
+  - name: blog
+    label: Blog posts
+    type: collection
+    path: src/content/blog
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true, description: "The headline. It also becomes the page link." }
+      - { name: description, label: Short description, type: text, required: true, description: "1–2 sentences. Shown on cards and in Google results (aim for under 155 characters)." }
+      - { name: date, label: Publish date, type: date, required: true }
+      - { name: updated, label: Last updated, type: date, description: "Optional. Set this when you make a big update." }
+      - { name: cover, label: Cover image, type: image, description: "Wide image, ideally 1600 × 800 px." }
+      - { name: coverAlt, label: Cover image description, type: string, description: "Describe the image for Google and screen readers." }
+      - { name: tags, label: Topics, type: string, list: true, description: "For example: Speed, Design, Conversion. The first one is shown on the card." }
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: draft, label: Draft (hidden from the site), type: boolean, default: true, description: "Turn this off to publish." }
+      - { name: body, label: Article, type: rich-text }
+
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    view:
+      fields: [title, client, date, draft]
+      primary: title
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Project title, type: string, required: true, description: "For example: A faster, cleaner store for Brand Name. It also becomes the page link." }
+      - { name: client, label: Client / brand name, type: string, required: true }
+      - { name: summary, label: Short summary, type: text, required: true, description: "1–2 sentences about what you did and the result." }
+      - { name: date, label: Finished on, type: date, required: true }
+      - { name: cover, label: Cover image, type: image, required: true, description: "A screenshot or mockup, ideally 1600 × 1000 px." }
+      - { name: coverAlt, label: Cover image description, type: string }
+      - { name: industry, label: Industry, type: string, description: "For example: Skincare, Fashion, Coffee." }
+      - { name: services, label: What you did, type: string, list: true, description: "For example: Store Setup, Theme Customization, Speed Optimization." }
+      - { name: liveUrl, label: Live store link, type: string, description: "Optional. Full link starting with https://" }
+      - name: results
+        label: Results (big numbers)
+        type: object
+        list: true
+        description: "Optional. Only real numbers, for example 2.1s → 0.9s load time."
+        fields:
+          - { name: value, label: Number, type: string }
+          - { name: label, label: What it means, type: string }
+      - name: gallery
+        label: More screenshots
+        type: object
+        list: true
+        fields:
+          - { name: src, label: Image, type: image }
+          - { name: alt, label: Description, type: string }
+      - { name: featured, label: Show first, type: boolean, default: false }
+      - { name: draft, label: Draft (hidden from the site), type: boolean, default: true, description: "Turn this off to publish." }
+      - { name: body, label: Case study, type: rich-text }

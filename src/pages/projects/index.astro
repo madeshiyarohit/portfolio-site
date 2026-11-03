@@ -1,0 +1,33 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { SITE } from "../../site.config.mjs";
+import { getProjects } from "../../lib/content.js";
+
+const projects = await getProjects();
+const ld = [
+  { "@context": "https://schema.org", "@type": "CollectionPage", name: "Shopify Projects & Case Studies", url: new URL("/projects/", SITE.url).href,
+    mainEntity: { "@type": "ItemList", itemListElement: projects.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.data.title, url: new URL(`/projects/${p.id}/`, SITE.url).href })) } },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+    { "@type": "ListItem", position: 2, name: "Projects", item: new URL("/projects/", SITE.url).href } ] }
+];
+---
+<Base page="projects" title={`Shopify Projects & Case Studies | ${SITE.name}`}
+  description="Shopify stores designed, built, sped up and tested by Rohit Madeshiya. See what was done for each brand and the results."
+  jsonLd={ld} noindex={projects.length === 0}>
+  <header class="page-head">
+    <div class="wrap">
+      <ol class="crumbs reveal"><li><a href="/">Home</a></li><li aria-current="page">Projects</li></ol>
+      <h1 class="reveal">Selected <span class="serif hl">Work</span></h1>
+      <p class="lead reveal">Real stores. Real brands. Built to look good and sell even better. Here's what I did for each one.</p>
+    </div>
+  </header>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      {projects.length === 0
+        ? <div class="empty"><h2>Case studies are on the way</h2><p>I'm putting the details together. Want to see examples now? Let's talk.</p><a class="btn btn-accent" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a Free Meeting</a></div>
+        : <div class="card-grid">{projects.map(p => <ProjectCard project={p} headingLevel="h2" />)}</div>}
+    </div>
+  </section>
+</Base>

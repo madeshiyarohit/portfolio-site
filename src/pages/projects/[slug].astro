@@ -1,0 +1,62 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { render } from "astro:content";
+import { SITE } from "../../site.config.mjs";
+import { getProjects } from "../../lib/content.js";
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({ params: { slug: project.id }, props: { project, next: projects[(i + 1) % projects.length], count: projects.length } }));
+}
+const { project, next, count } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+const url = new URL(`/projects/${project.id}/`, SITE.url).href;
+const ld = [
+  { "@context": "https://schema.org", "@type": "CreativeWork", name: d.title, headline: d.title, description: d.summary, url,
+    image: new URL(d.cover, SITE.url).href, dateCreated: d.date.toISOString(), keywords: d.services.join(", "),
+    creator: { "@type": "Person", name: SITE.name, url: SITE.url + "/" },
+    ...(d.client ? { sourceOrganization: { "@type": "Organization", name: d.client, ...(d.liveUrl ? { url: d.liveUrl } : {}) } } : {}) },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+    { "@type": "ListItem", position: 2, name: "Projects", item: new URL("/projects/", SITE.url).href },
+    { "@type": "ListItem", position: 3, name: d.title, item: url } ] }
+];
+---
+<Base page="project" type="article" title={`${d.title}: Shopify Case Study | ${SITE.name}`} description={d.summary}
+  image={d.cover} imageAlt={d.coverAlt || d.title} jsonLd={ld} noindex={d.draft}>
+  <article>
+    <header class="page-head">
+      <div class="wrap">
+        <ol class="crumbs reveal"><li><a href="/">Home</a></li><li><a href="/projects/">Projects</a></li><li aria-current="page">{d.client}</li></ol>
+        <h1 class="reveal" style="font-size:clamp(38px,6vw,76px);max-width:18ch">{d.title}</h1>
+        <p class="lead reveal">{d.summary}</p>
+        <div class="case-meta reveal">
+          <div><small>Client</small><b>{d.client}</b></div>
+          {d.industry && <div><small>Industry</small><b>{d.industry}</b></div>}
+          <div><small>Year</small><b>{d.date.getUTCFullYear()}</b></div>
+          {d.services.length > 0 && <div><small>What I did</small><b>{d.services.join(", ")}</b></div>}
+        </div>
+        {d.liveUrl && <div style="margin-top:22px" class="reveal"><a class="btn btn-ghost" href={d.liveUrl} target="_blank" rel="noopener">Visit the live store <span class="arr" aria-hidden="true">↗</span></a></div>}
+      </div>
+    </header>
+    <div class="wrap">
+      <figure class="case-cover reveal"><img src={d.cover} alt={d.coverAlt || d.title} class="zoomable" data-group="case" tabindex="0" role="button" width="1600" height="1000" fetchpriority="high"></figure>
+      {d.results.length > 0 && <div class="results">{d.results.map(r => <div class="reveal"><b>{r.value}</b><span>{r.label}</span></div>)}</div>}
+      <div class="case-body" style="margin-top:clamp(36px,5vw,56px)"><div class="prose"><Content /></div></div>
+      {d.gallery.length > 0 && <div class="gallery">{d.gallery.map(g => <img src={g.src} alt={g.alt || d.title} class="zoomable reveal" data-group="case" tabindex="0" role="button" loading="lazy" decoding="async" width="1200" height="900">)}</div>}
+      <div class="cta-band reveal">
+        <h2>Want results like <span class="serif">these?</span></h2>
+        <p>Tell me about your store and what you want to improve. The first meeting is free.</p>
+        <div class="contact-actions" style="margin-top:6px"><a class="btn btn-accent" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a Free Meeting <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-ghost" href="/contact/" style="color:#f4f4f6;border-color:rgba(255,255,255,.25)">Send a Message</a></div>
+      </div>
+    </div>
+  </article>
+  {count > 1 && <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow"><b>✦</b>Next project</span><h2>Keep <span class="serif">exploring</span></h2></div>
+      <div class="card-grid"><ProjectCard project={next} /></div>
+    </div>
+  </section>}
+</Base>

@@ -1,0 +1,53 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostCard from "../../components/PostCard.astro";
+import { SITE } from "../../site.config.mjs";
+import { getPosts } from "../../lib/content.js";
+
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap(p => p.data.tags))];
+const ld = [
+  { "@context": "https://schema.org", "@type": "Blog", name: `${SITE.name}'s Shopify Blog`, url: new URL("/blog/", SITE.url).href,
+    author: { "@type": "Person", name: SITE.name, url: SITE.url + "/" },
+    blogPost: posts.map(p => ({ "@type": "BlogPosting", headline: p.data.title, url: new URL(`/blog/${p.id}/`, SITE.url).href, datePublished: p.data.date.toISOString() })) },
+  { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: new URL("/blog/", SITE.url).href } ] }
+];
+---
+<Base page="blog" title={`Shopify Blog: Tips on Speed, Design & Sales | ${SITE.name}`}
+  description="Practical Shopify tips from Rohit Madeshiya: store speed, design, conversion and testing, written for store owners who want to sell more."
+  jsonLd={ld} noindex={posts.length === 0}>
+  <header class="page-head">
+    <div class="wrap">
+      <ol class="crumbs reveal"><li><a href="/">Home</a></li><li aria-current="page">Blog</li></ol>
+      <h1 class="reveal">The Shopify <span class="serif hl">Blog</span></h1>
+      <p class="lead reveal">Practical tips on store speed, design and selling more, from someone who builds and tests Shopify stores every day.</p>
+    </div>
+  </header>
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      {posts.length === 0 ? (
+        <div class="empty"><h2>Articles are on the way</h2><p>The first posts are being written. In the meantime, let's talk about your store.</p><a class="btn btn-accent" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a Free Meeting</a></div>
+      ) : (
+        <>
+          {tags.length > 1 && <div class="filters" role="group" aria-label="Filter by topic">
+            <button type="button" aria-pressed="true" data-tag="">All</button>
+            {tags.map(t => <button type="button" aria-pressed="false" data-tag={t}>{t}</button>)}
+          </div>}
+          <div class="card-grid" id="post-grid">
+            {posts.map((p, i) => <PostCard post={p} wide={i === 0 && posts.length > 2} headingLevel="h2" />)}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+  <script is:inline slot="after">
+    /* Topic filter: show only the posts with the chosen tag */
+    document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+      document.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+      const tag = b.dataset.tag;
+      document.querySelectorAll("#post-grid > a").forEach(card => { card.hidden = !!tag && !card.dataset.tags.split("|").includes(tag); });
+    }));
+  </script>
+</Base>
