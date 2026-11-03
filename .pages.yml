@@ -19,6 +19,7 @@ content:
         order: desc
     fields:
       - { name: title, label: Title, type: string, required: true, description: "The headline. It also becomes the page link." }
+      - { name: seoTitle, label: Google title (optional), type: string, description: "A shorter title for Google, about 60 characters. Leave empty to use the title." }
       - { name: description, label: Short description, type: text, required: true, description: "1–2 sentences. Shown on cards and in Google results (aim for under 155 characters)." }
       - { name: date, label: Publish date, type: date, required: true }
       - { name: updated, label: Last updated, type: date, description: "Optional. Set this when you make a big update." }

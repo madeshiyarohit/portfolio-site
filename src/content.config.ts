@@ -7,6 +7,8 @@ const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
+    // Optional shorter title for Google (about 60 characters max). Falls back to the title.
+    seoTitle: z.string().optional(),
     description: z.string(),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
@@ -23,6 +25,7 @@ const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     client: z.string(),
     summary: z.string(),
     date: z.coerce.date(),

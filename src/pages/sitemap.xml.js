@@ -7,7 +7,7 @@ export async function GET() {
   const projects = (await getProjects()).filter(p => !p.data.draft);
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
-    { loc: "/", lastmod: today, priority: "1.0", images: ["/Assets/rohit-madeshiya-shopify-expert-hero.jpg", SITE.shareImage] },
+    { loc: "/", lastmod: today, priority: "1.0", images: ["/Assets/rohit-madeshiya-shopify-expert-hero.webp", SITE.shareImage] },
     { loc: "/contact/", lastmod: today, priority: "0.7" },
     ...(projects.length ? [{ loc: "/projects/", lastmod: today, priority: "0.8" }] : []),
     ...projects.map(p => ({ loc: `/projects/${p.id}/`, lastmod: p.data.date.toISOString().slice(0, 10), priority: "0.7", images: [p.data.cover] })),

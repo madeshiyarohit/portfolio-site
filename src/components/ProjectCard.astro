@@ -3,7 +3,7 @@ const { project, headingLevel = "h3" } = Astro.props;
 const d = project.data;
 const H = headingLevel;
 ---
-<a class="pcard2 spot reveal" href={`/projects/${project.id}/`}>
+<a class="pcard2 spot reveal" href={`/projects/${project.id}/`} target="_blank" rel="noopener">
   {d.draft && <span class="draft-badge">Draft</span>}
   <div class="thumb">
     <img src={d.cover} alt={d.coverAlt || `${d.title}, a Shopify project for ${d.client}`} width="1200" height="750" loading="lazy" decoding="async">
@@ -15,4 +15,5 @@ const H = headingLevel;
     {d.services.length > 0 && <div class="chips">{d.services.slice(0, 3).map(s => <span>{s}</span>)}</div>}
   </div>
   <span class="card-go" aria-hidden="true">→</span>
+  <span class="sr-only">(opens in a new tab)</span>
 </a>

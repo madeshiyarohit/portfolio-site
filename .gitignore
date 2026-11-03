@@ -7,3 +7,6 @@ design-originals/
 
 # Private project guide: stays on this computer only, never pushed to GitHub.
 PROJECT-GUIDE.md
+
+# Reference project studies of other brands: for local layout previews only, never published.
+src/content/projects/reference-*.md

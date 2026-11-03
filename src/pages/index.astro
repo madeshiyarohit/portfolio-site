@@ -1,33 +1,194 @@
 ---
-// Homepage. Most text comes from the PROFILE object in the script at the bottom of this file;
-// the HTML below also holds a ready-made copy of it so search engines see everything without running scripts.
+// Homepage. ALL text here comes from src/data/profile.js; edit that file, not this one.
+// Everything is rendered into plain HTML at build time (fast, and search engines see it all);
+// /js/home.js only adds the interactive behaviour.
 import Base from "../layouts/Base.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import PostCard from "../components/PostCard.astro";
 import { SITE } from "../site.config.mjs";
 import { getPosts, getProjects } from "../lib/content.js";
+import { PROFILE as P } from "../data/profile.js";
+import { ROLE_ICONS, EDU_ICONS, SVC_ICONS, PAY_ICONS, CHECK, CHEV, TICK } from "../data/icons.js";
 
 const projects = await getProjects();
 const posts = await getPosts();
-// Structured data (who you are, services with prices, FAQ). Update it if you change services, prices or FAQ.
-const graph = JSON.parse(JSON.stringify({"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://yourdomain.com/#person", "name": "Rohit Madeshiya", "url": "https://yourdomain.com/", "image": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-hero.jpg", "jobTitle": "Shopify Expert, Developer & Consultant", "description": "Shopify consultant, developer and tester who builds fast, conversion-focused Shopify stores for brands worldwide, and tests every store before launch.", "email": "mailto:itsrohitmadeshiya@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Yamunanagar", "addressRegion": "Haryana", "addressCountry": "IN"}, "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Tilak Raj Chadha Institute of Management and Technology"}, {"@type": "CollegeOrUniversity", "name": "Kurukshetra University"}], "hasOccupation": [{"@type": "Occupation", "name": "Shopify Consultant, Developer & Tester", "occupationLocation": {"@type": "Country", "name": "India"}, "skills": "Shopify, Liquid, theme development, store setup, speed optimization, conversion optimization, QA testing"}, {"@type": "Occupation", "name": "Software Tester", "skills": "Functional, regression and end-to-end testing for banking and healthcare applications"}], "award": ["4 Applause Awards at Deloitte", "2 Support Awards at Deloitte"], "knowsLanguage": [{"@type": "Language", "name": "English"}, {"@type": "Language", "name": "Hindi"}], "knowsAbout": ["Shopify", "Shopify theme development", "Liquid", "Shopify store setup", "Shopify speed optimization", "Conversion rate optimization", "Technical SEO", "Software testing", "Quality assurance", "Cross-browser testing", "HTML", "CSS", "JavaScript", "React", "Bootstrap"]}, {"@type": "ProfessionalService", "@id": "https://yourdomain.com/#service", "name": "Rohit Madeshiya – Shopify Expert & Developer", "url": "https://yourdomain.com/", "image": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-share.jpg", "logo": "https://yourdomain.com/Assets/rohit-madeshiya-favicon-512.png", "description": "Shopify store design, development, speed optimization and QA testing for brands worldwide.", "founder": {"@id": "https://yourdomain.com/#person"}, "email": "itsrohitmadeshiya@gmail.com", "priceRange": "$129 – $600", "areaServed": "Worldwide", "address": {"@type": "PostalAddress", "addressLocality": "Yamunanagar", "addressRegion": "Haryana", "addressCountry": "IN"}, "paymentAccepted": "PayPal, Payoneer, Wise, Bank Transfer, Fiverr", "serviceType": ["Shopify consulting", "Shopify store setup", "Shopify theme customization", "Shopify speed optimization", "Shopify conversion optimization", "Shopify QA testing"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Shopify services", "itemListElement": [{"@type": "Offer", "name": "Shopify Store Design", "description": "A store that looks great and feels true to your brand.", "url": "https://yourdomain.com/#services", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 199, "priceCurrency": "USD"}, "itemOffered": {"@type": "Service", "name": "Shopify Store Design", "description": "A store that looks great and feels true to your brand.", "provider": {"@id": "https://yourdomain.com/#person"}}}, {"@type": "Offer", "name": "Shopify Speed & Fixes", "description": "Make your store faster and fix what's broken.", "url": "https://yourdomain.com/#services", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 129, "priceCurrency": "USD"}, "itemOffered": {"@type": "Service", "name": "Shopify Speed & Fixes", "description": "Make your store faster and fix what's broken.", "provider": {"@id": "https://yourdomain.com/#person"}}}, {"@type": "Offer", "name": "Full Shopify Store Build", "description": "Everything from setup to launch, done for you.", "url": "https://yourdomain.com/#services", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 600, "priceCurrency": "USD"}, "itemOffered": {"@type": "Service", "name": "Full Shopify Store Build", "description": "Everything from setup to launch, done for you.", "provider": {"@id": "https://yourdomain.com/#person"}}}]}}, {"@type": "WebSite", "@id": "https://yourdomain.com/#website", "url": "https://yourdomain.com/", "name": "Rohit Madeshiya – Shopify Expert", "publisher": {"@id": "https://yourdomain.com/#person"}, "inLanguage": "en"}, {"@type": "WebPage", "@id": "https://yourdomain.com/#webpage", "url": "https://yourdomain.com/", "name": "Shopify Expert & Developer for Hire | Rohit Madeshiya", "isPartOf": {"@id": "https://yourdomain.com/#website"}, "about": {"@id": "https://yourdomain.com/#person"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-share.jpg", "width": 1200, "height": 630}, "inLanguage": "en"}, {"@type": "FAQPage", "@id": "https://yourdomain.com/#faq", "mainEntity": [{"@type": "Question", "name": "Do you work with clients outside India?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. I work remotely with brands worldwide. We meet over Google Meet, and you get regular updates so you always know where your store stands."}}, {"@type": "Question", "name": "Can you fix or improve my existing Shopify store?", "acceptedAnswer": {"@type": "Answer", "text": "Absolutely. The Speed & Fixes package covers a speed audit, bug, layout and checkout fixes, all tested across devices before I hand it back."}}, {"@type": "Question", "name": "What makes you different from other Shopify developers?", "acceptedAnswer": {"@type": "Answer", "text": "I'm a developer and a software tester. I tested banking and healthcare apps at Deloitte, so every store I build is checked on every device and browser before a single customer sees it."}}, {"@type": "Question", "name": "How do payments work?", "acceptedAnswer": {"@type": "Answer", "text": "You can pay through Fiverr, PayPal, Payoneer, Wise or a bank transfer, whichever suits you best."}}, {"@type": "Question", "name": "Do you offer support after launch?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Launch day isn't goodbye: I stick around to fix, fine-tune and help your store grow."}}, {"@type": "Question", "name": "How do we get started?", "acceptedAnswer": {"@type": "Answer", "text": "Book a free meeting. We'll talk about your brand, your goals and what your store needs, and I'll suggest the right plan, with no obligation."}}]}]}).replaceAll("https://yourdomain.com", SITE.url));
+const pad = n => String(n).padStart(2, "0");
+const prices = P.services.map(s => Number(s.price.replace(/[^0-9.]/g, "")));
+// Structured data for Google: who you are, services with prices and the FAQ, all taken from profile.js.
+const ld = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://yourdomain.com/#person",
+      "name": "Rohit Madeshiya",
+      "url": "https://yourdomain.com/",
+      "image": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-hero.webp",
+      "jobTitle": "Shopify Expert, Developer & Consultant",
+      "description": "Shopify consultant, developer and tester who builds fast, conversion-focused Shopify stores for brands worldwide, and tests every store before launch.",
+      "email": "mailto:itsrohitmadeshiya@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Yamunanagar",
+        "addressRegion": "Haryana",
+        "addressCountry": "IN"
+      },
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Tilak Raj Chadha Institute of Management and Technology"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Kurukshetra University"
+        }
+      ],
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "Shopify Consultant, Developer & Tester",
+          "occupationLocation": {
+            "@type": "Country",
+            "name": "India"
+          },
+          "skills": "Shopify, Liquid, theme development, store setup, speed optimization, conversion optimization, QA testing"
+        },
+        {
+          "@type": "Occupation",
+          "name": "Software Tester",
+          "skills": "Functional, regression and end-to-end testing for banking and healthcare applications"
+        }
+      ],
+      "award": [
+        "4 Applause Awards at Deloitte",
+        "2 Support Awards at Deloitte"
+      ],
+      "knowsLanguage": [
+        {
+          "@type": "Language",
+          "name": "English"
+        },
+        {
+          "@type": "Language",
+          "name": "Hindi"
+        }
+      ],
+      "knowsAbout": [
+        "Shopify",
+        "Shopify theme development",
+        "Liquid",
+        "Shopify store setup",
+        "Shopify speed optimization",
+        "Conversion rate optimization",
+        "Technical SEO",
+        "Software testing",
+        "Quality assurance",
+        "Cross-browser testing",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Bootstrap"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://yourdomain.com/#service",
+      "name": "Rohit Madeshiya – Shopify Expert & Developer",
+      "url": "https://yourdomain.com/",
+      "image": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-share.jpg",
+      "logo": "https://yourdomain.com/Assets/rohit-madeshiya-favicon-512.png",
+      "description": "Shopify store design, development, speed optimization and QA testing for brands worldwide.",
+      "founder": {
+        "@id": "https://yourdomain.com/#person"
+      },
+      "email": "itsrohitmadeshiya@gmail.com",
+      "priceRange": "$129 – $600",
+      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Yamunanagar",
+        "addressRegion": "Haryana",
+        "addressCountry": "IN"
+      },
+      "paymentAccepted": "PayPal, Payoneer, Wise, Bank Transfer, Fiverr",
+      "serviceType": [
+        "Shopify consulting",
+        "Shopify store setup",
+        "Shopify theme customization",
+        "Shopify speed optimization",
+        "Shopify conversion optimization",
+        "Shopify QA testing"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Shopify services",
+        "itemListElement": P.services.map(s => ({
+          "@type": "Offer", name: s.title, description: s.text, url: "https://yourdomain.com/#services",
+          priceSpecification: { "@type": "PriceSpecification", minPrice: Number(s.price.replace(/[^0-9.]/g, "")), priceCurrency: "USD" },
+          itemOffered: { "@type": "Service", name: s.title, description: s.text, provider: { "@id": "https://yourdomain.com/#person" } }
+        }))
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yourdomain.com/#website",
+      "url": "https://yourdomain.com/",
+      "name": "Rohit Madeshiya – Shopify Expert",
+      "publisher": {
+        "@id": "https://yourdomain.com/#person"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://yourdomain.com/#webpage",
+      "url": "https://yourdomain.com/",
+      "name": "Shopify Expert & Developer for Hire | Rohit Madeshiya",
+      "isPartOf": {
+        "@id": "https://yourdomain.com/#website"
+      },
+      "about": {
+        "@id": "https://yourdomain.com/#person"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/Assets/rohit-madeshiya-shopify-expert-share.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://yourdomain.com/#faq",
+      "mainEntity": P.faq.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }))
+    }
+  ]
+};
+ld["@graph"].find(x => x["@type"] === "ProfessionalService").priceRange = `$${Math.min(...prices)} – $${Math.max(...prices)}`;
+const graph = JSON.parse(JSON.stringify(ld).replaceAll("https://yourdomain.com", SITE.url));
+const shortTool = n => n.split(" ").map(w => w[0]).join("").slice(0, 2);
+const ICON_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+const ICON_LOOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>';
 ---
 <Base
   page="home"
   title="Shopify Expert & Developer for Hire | Rohit Madeshiya"
   description="Rohit Madeshiya is a Shopify expert, developer and consultant who builds fast, conversion-focused Shopify stores, tested before launch. Book a free meeting."
   jsonLd={graph}
+  preloadImage="/Assets/rohit-madeshiya-shopify-expert-hero.webp"
 >
   <header class="hero" id="top">
     <div class="wrap hero-grid">
       <div class="hero-text">
-        <p class="status reveal"><i class="live" aria-hidden="true"></i>Available for new projects<i class="sep" aria-hidden="true"></i><time id="local-time"></time></p>
-        <p class="hello reveal" id="hello" style="--rd:.05s">👋 Hello there, I'm</p>
+        <p class="status reveal"><i class="live" aria-hidden="true"></i>Available for remote projects worldwide<i class="sep" aria-hidden="true"></i><time id="local-time"></time></p>
+        <p class="hello reveal" id="hello" style="--rd:.05s">{P.greeting}</p>
         <h1 id="name" class="reveal" style="--rd:.1s">Rohit <span class="last">Madeshiya<span class="hl">.</span></span><span class="sr-only">, Shopify Expert, Developer &amp; Consultant</span></h1>
-        <p class="role-line reveal" style="--rd:.15s" aria-live="polite"><span class="ri" id="role-ico" aria-hidden="true"></span><span class="rot serif" id="roles"><span class="on">Shopify Consultant</span><span>Shopify Expert</span><span>Quality Expert</span></span><!--/static--></p>
-        <p class="tagline reveal" id="tagline" style="--rd:.2s">I build Shopify stores that <b>stop the scroll</b> and <b>start the sale</b>.</p>
+        <p class="role-line reveal" style="--rd:.15s" aria-live="polite"><span class="ri" id="role-ico" aria-hidden="true" set:html={ROLE_ICONS[P.roles[0].icon]} /><span class="rot serif" id="roles">{P.roles.map((r, i) => <span class:list={{ on: i === 0 }} data-icon={r.icon}>{r.label}</span>)}</span></p>
+        <p class="tagline reveal" id="tagline" style="--rd:.2s" set:html={P.tagline} />
         <div class="hero-cta reveal" style="--rd:.25s">
-          <a class="btn btn-accent" id="cta" target="_blank" rel="noopener">
+          <a class="btn btn-accent" id="cta" href={P.bookingUrl} target="_blank" rel="noopener">
             <svg class="meet-ico" viewBox="0 0 87.5 72" aria-hidden="true">
               <path fill="#00832d" d="M49.5 36l8.53 9.75 11.47 7.33 2-17.02-2-16.64-11.69 6.44z"/>
               <path fill="#0066da" d="M0 51.5V66c0 3.315 2.685 6 6 6h14.5l3-10.96-3-9.54-9.95-3z"/>
@@ -45,13 +206,13 @@ const graph = JSON.parse(JSON.stringify({"@context": "https://schema.org", "@gra
           <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Clients worldwide</span></li>
           <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tested before launch</span></li>
         </ul>
-        <a class="scroll-cue" href="#experience"><i aria-hidden="true"></i>Scroll to explore</a>
+        <a class="scroll-cue" href="#services"><i aria-hidden="true"></i>Scroll to explore</a>
       </div>
 
       <figure class="portrait reveal" style="--rd:.2s; margin:0">
         <span class="ring" aria-hidden="true"></span>
         <div class="portrait-frame">
-          <img src="/Assets/rohit-madeshiya-shopify-expert-hero.jpg" alt="Rohit Madeshiya, Shopify expert and developer, smiling with arms crossed" width="900" height="1125" fetchpriority="high">
+          <img src="/Assets/rohit-madeshiya-shopify-expert-hero.webp" alt="Rohit Madeshiya, Shopify expert and developer, smiling with arms crossed" width="900" height="1125" fetchpriority="high">
         </div>
         <div class="float f1" aria-hidden="true"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span>Shopify Expert<small>Stores that sell</small></span></div>
         <div class="float f2" aria-hidden="true"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>QA Passed<small>Every device</small></span></div>
@@ -60,76 +221,50 @@ const graph = JSON.parse(JSON.stringify({"@context": "https://schema.org", "@gra
     </div>
   </header>
 
-  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"><span>Shopify Consulting</span><span>Store Setup</span><span>Theme Development</span><span>Custom Sections</span><span>App Integration</span><span>Speed Optimization</span><span>Conversion Optimization</span><span>Mobile-First Design</span><span>Quality Testing</span><span>Cross-Browser Testing</span><span>Bug Fixing</span><span>Store Audits</span><span>Technical SEO</span><span>Shopify Consulting</span><span>Store Setup</span><span>Theme Development</span><span>Custom Sections</span><span>App Integration</span><span>Speed Optimization</span><span>Conversion Optimization</span><span>Mobile-First Design</span><span>Quality Testing</span><span>Cross-Browser Testing</span><span>Bug Fixing</span><span>Store Audits</span><span>Technical SEO</span></div><!--/static--></div>
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker">{[...P.toolTags, ...P.toolTags].map(t => <span>{t}</span>)}</div></div>
 
-  <section class="sec" id="experience">
+  <!-- 01 · Services & pricing -->
+  <section class="sec" id="services">
     <div class="wrap">
-      <div class="sec-head reveal"><span class="eyebrow"><b>01</b>Experience</span><h2>Career <span class="serif">Experience</span></h2><p>Built websites. Tested banking apps. Now building Shopify stores that just work.</p></div>
-      <div class="exp-wrap reveal" id="exp"><div class="exp-tabs" role="tablist" aria-label="Roles" aria-orientation="vertical">
-    <button class="exp-tab" role="tab" id="exp-tab-0" aria-controls="exp-panel" aria-selected="true" tabindex="0">
-      <i class="org-ico" style="background:#5e8e3e" aria-hidden="true">F</i><b class="exp-full">Shopify Consultant, Developer &amp; Tester</b>
-      <small><i class="dot" aria-hidden="true"></i>Now · Freelance</small>
-      <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
-    </button><button class="exp-tab" role="tab" id="exp-tab-1" aria-controls="exp-panel" aria-selected="false" tabindex="-1">
-      <i class="org-ico" style="background:#86bc25" aria-hidden="true">D</i><b class="exp-full">Software Tester</b>
-      <small>Deloitte</small>
-      <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
-    </button><button class="exp-tab" role="tab" id="exp-tab-2" aria-controls="exp-panel" aria-selected="false" tabindex="-1">
-      <i class="org-ico" style="background:#e44d26" aria-hidden="true">F</i><b class="exp-full">Web Developer</b>
-      <small>Freelance</small>
-      <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span>
-    </button>
-  </div>
-  <article class="exp-panel spot" id="exp-panel" role="tabpanel" aria-live="polite" aria-labelledby="exp-tab-0" style="--org: #5e8e3e;">
-    <div class="exp-head"><i class="org-ico" style="background:#5e8e3e" aria-hidden="true">F</i><span class="exp-org">Freelance</span>
-      <div class="meta"><span class="now">Now</span><span>Remote</span></div>
-    </div>
-    <h3>Shopify Consultant, Developer &amp; Tester</h3>
-    <p>Helping brands plan, build and launch Shopify stores that look great, load fast and are tested before a single customer sees them.</p>
-    <ul class="checks"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.8"></path></svg><span>Shopify consulting: store strategy, apps and the right setup for your goals</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.8"></path></svg><span>Store setup, theme customization and custom sections</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.8"></path></svg><span>App integrations, payments and shipping configuration</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.8"></path></svg><span>Speed and conversion optimization</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.8"></path></svg><span>Full QA testing on every device and browser before launch</span></li></ul>
-    <div class="tags"><span>Shopify</span><span>Liquid</span><span>Consulting</span><span>QA Testing</span></div>
-    <span class="count" aria-hidden="true">01 / 03</span></article></div><!--/static-->
-    </div>
-    <div class="wrap">
-      <!-- Photo strip and the line under it are hidden for now: remove "hidden" on both to bring them back -->
-      <div class="strip" id="strip" hidden><div class="strip-track" id="strip-track"></div></div>
-      <p class="strip-note reveal" hidden>You see the launch. I sweat the details: <b>every page tested, every click checked</b>, so your customers only see a store that works.</p>
+      <div class="sec-head center reveal"><span class="eyebrow"><b>01</b>Pricing</span><h2>Ways to Work <span class="serif">Together</span></h2><p>Clear prices, no surprises. Pick what your store needs today.</p></div>
+      <div class="services" id="services-list">
+        {P.services.map((s, i) => (
+          <div class:list={["svc spot reveal", { featured: s.featured }]} style={`--rd:${i * 0.08}s`}>
+            {s.featured && <span class="badge">★ Most Popular</span>}
+            <span class="ico" set:html={SVC_ICONS[s.ico] || ""} />
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <div class="price"><small>From</small><b>{s.price}</b></div>
+            {(s.delivery || s.revisions) && <div class="svc-meta">
+              {s.delivery && <span><Fragment set:html={ICON_CLOCK} />Delivery in {s.delivery}</span>}
+              {s.revisions && <span><Fragment set:html={ICON_LOOP} />{s.revisions}</span>}
+            </div>}
+            <ul>{(s.features || []).map(f => <li><Fragment set:html={TICK} />{f}</li>)}</ul>
+            <a class:list={["btn", s.featured ? "btn-accent" : "btn-ghost"]} href={P.bookingUrl} target="_blank" rel="noopener" aria-label={`Get started with ${s.title}`}>Get Started <i aria-hidden="true">→</i></a>
+          </div>
+        ))}
+      </div>
+      <div class="next-steps reveal">
+        <h3>What happens next</h3>
+        <ol>{P.nextSteps.map((st, i) => <li><b class="ns-num">{i + 1}</b><div><b>{st.title}</b><p>{st.text}</p></div></li>)}</ol>
+      </div>
+      <p class="svc-note reveal">Not sure which one fits? <a href={P.bookingUrl} id="svc-call" target="_blank" rel="noopener">Book a free call</a> and we'll figure it out together. <span class="reply"><i class="live" aria-hidden="true"></i>{P.responseTime}</span></p>
+      <div class="pay reveal" id="pay"><span class="pay-label">Accepted payment methods</span>{P.payments.map(p => <span class="pay-item"><Fragment set:html={PAY_ICONS[p] || ""} />{p}</span>)}</div>
     </div>
   </section>
 
-  <section class="sec alt" id="education">
+  <!-- 02 · How I work -->
+  <section class="sec alt" id="process">
     <div class="wrap">
-      <div class="sec-head center reveal"><span class="eyebrow"><b>02</b>Education</span><h2>Academic <span class="serif">Journey</span></h2><p>Three milestones that taught me how to learn, think and build.</p></div>
-      <div class="edu reveal" id="edu"><div class="edu-rail" role="tablist" aria-label="Academic milestones">
-    <div class="edu-track" aria-hidden="true"><i class="edu-fill" style="--p: 1;"></i></div>
-    <button class="edu-node done" role="tab" id="edu-tab-0" aria-controls="edu-panel" aria-selected="false" tabindex="-1">
-      <span class="edu-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.3 5.2 7.8 4.5 4 4.5v13c3.8 0 6.3.7 8 2 1.7-1.3 4.2-2 8-2v-13c-3.8 0-6.3.7-8 2z"></path><path d="M12 6.5v13"></path></svg></span><b>2017</b><small>Secondary</small>
-    </button><button class="edu-node done" role="tab" id="edu-tab-1" aria-controls="edu-panel" aria-selected="false" tabindex="-1">
-      <span class="edu-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V11l7-4 7 4v10"></path><path d="M12 7V3l3 1.5L12 6"></path><path d="M10 21v-4h4v4M8.5 13h.01M15.5 13h.01"></path></svg></span><b>2019</b><small>Senior Secondary</small>
-    </button><button class="edu-node" role="tab" id="edu-tab-2" aria-controls="edu-panel" aria-selected="true" tabindex="0">
-      <span class="edu-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5L12 5l10 4.5L12 14 2 9.5z"></path><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.5M22 9.5V15"></path></svg></span><b>2022</b><small>BCA Degree</small>
-    </button>
-  </div>
-  <div class="edu-panel spot" id="edu-panel" role="tabpanel" aria-live="polite" aria-labelledby="edu-tab-2">
-    <div class="edu-big" aria-hidden="true">2022<small>2019 – 2022</small></div>
-    <div class="edu-body">
-      <em class="stage">Step 3 · Earning the Degree</em>
-      <h3>Tilak Raj Chadha Institute of Management and Technology (TIMT)</h3>
-      <p class="edu-deg">BCA, Kurukshetra University</p>
-      <p class="edu-story">Three years of learning to build software properly. Programming, databases and the web became the foundation for everything I build today.</p>
-      <ul class="tags" aria-label="What I took away"><li>Programming</li><li>Databases</li><li>Web development</li><li>Software testing</li></ul>
-    </div>
-    <span class="count" aria-hidden="true">03 / 03</span></div></div><!--/static-->
-    </div>
-  </section>
-
-  <section class="sec" id="tools">
-    <div class="wrap">
-      <div class="sec-head reveal"><span class="eyebrow"><b>03</b>Toolkit</span><h2>Tools &amp; <span class="serif">Capabilities</span></h2><p>Modern tools, proven skills and one goal: a store that sells more.</p></div>
-      <div class="bento">
-        <div class="b-tools spot reveal"><h3>Tools I use every day</h3><p class="sub">From building the store to researching what works.</p><div class="tool-grid" id="tools-top"><span class="tool"><i style="background:#95bf47" aria-hidden="true">S</i>Shopify</span><span class="tool"><i style="background:#10a37f" aria-hidden="true">C</i>ChatGPT</span><span class="tool"><i style="background:#d97757" aria-hidden="true">C</i>Claude</span><span class="tool"><i style="background:#4285f4" aria-hidden="true">GS</i>Google Search</span><span class="tool"><i style="background:#e44d26" aria-hidden="true">H</i>HTML</span><span class="tool"><i style="background:#264de4" aria-hidden="true">C</i>CSS</span><span class="tool"><i style="background:#f7df1e;color:#111" aria-hidden="true">J</i>JavaScript</span></div><!--/static--><p class="tool-note"><span class="live" aria-hidden="true"></span>Always exploring new AI tools to build faster and smarter.</p></div>
-        <div class="b-skills spot reveal" style="--rd:.08s"><h3>What I can do for you</h3><p class="sub">Development, testing and consulting under one roof.</p><div class="skill-cloud" id="tools-bottom"><span>Shopify Consulting</span><span>Store Setup</span><span>Theme Development</span><span>Custom Sections</span><span>App Integration</span><span>Speed Optimization</span><span>Conversion Optimization</span><span>Mobile-First Design</span><span>Quality Testing</span><span>Cross-Browser Testing</span><span>Bug Fixing</span><span>Store Audits</span><span>Technical SEO</span></div><!--/static--></div>
-        <div class="b-quote spot reveal" style="--rd:.12s"><p>A developer who tests like a QA engineer, so <span class="serif hl">nothing breaks</span> on launch day.</p><a class="btn btn-ink" href="#services">View Services <span class="arr" aria-hidden="true">→</span></a></div>
+      <div class="sec-head center reveal"><span class="eyebrow"><b>02</b>Process</span><h2>How I <span class="serif">Work</span></h2><p>No guesswork. No ghosting. Just a clear path from your idea to a store that sells.</p></div>
+      <div class="process" id="process-list">
+        {P.steps.map((s, i) => (
+          <div class="pcard spot reveal" style={`--rd:${i * 0.08}s`}>
+            <div class="num"><b>{pad(i + 1)}</b><i aria-hidden="true"></i></div>
+            <h3>{s.title}</h3><p>{s.text}</p>
+            <span class="big" aria-hidden="true">{pad(i + 1)}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -143,73 +278,57 @@ const graph = JSON.parse(JSON.stringify({"@context": "https://schema.org", "@gra
     </div>
   </section>)}
 
-  <section class="sec alt" id="process">
+  <!-- 03 · Experience: every role is rendered; home.js switches between them -->
+  <section class="sec" id="experience">
     <div class="wrap">
-      <div class="sec-head center reveal"><span class="eyebrow"><b>04</b>Process</span><h2>How I <span class="serif">Work</span></h2><p>No guesswork. No ghosting. Just a clear path from your idea to a store that sells.</p></div>
-      <div class="process" id="process-list"><div class="pcard spot reveal" style="--rd:0s">
-    <div class="num"><b>01</b><i aria-hidden="true"></i></div>
-    <h3>I Listen First</h3><p>Before I touch a single line of code, I get to know your brand, your customers and what keeps you up at night. Your store is your hard work on display, and I treat it that way.</p>
-    <span class="big" aria-hidden="true">01</span>
-  </div>
-  <div class="pcard spot reveal" style="--rd:0.08s">
-    <div class="num"><b>02</b><i aria-hidden="true"></i></div>
-    <h3>I Build It Like It's Mine</h3><p>I turn your vision into a store that feels like you, step by step, with regular updates so you're never left wondering. You see real progress, never excuses.</p>
-    <span class="big" aria-hidden="true">02</span>
-  </div>
-  <div class="pcard spot reveal" style="--rd:0.16s">
-    <div class="num"><b>03</b><i aria-hidden="true"></i></div>
-    <h3>I Stay After Launch</h3><p>Every page, button and checkout is tested on every device before we go live. And launch day isn't goodbye: I stick around to fix, fine-tune and help your store grow.</p>
-    <span class="big" aria-hidden="true">03</span>
-  </div></div><!--/static-->
+      <div class="sec-head reveal"><span class="eyebrow"><b>03</b>Experience</span><h2>Career <span class="serif">Experience</span></h2><p>Built websites. Tested banking apps. Now building Shopify stores that just work.</p></div>
+      <div class="exp-wrap reveal" id="exp">
+        <div class="exp-tabs" role="tablist" aria-label="Roles" aria-orientation="vertical">
+          {P.experience.map((e, i) => (
+            <button class="exp-tab" role="tab" id={`exp-tab-${i}`} aria-controls={`exp-panel-${i}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1} data-short={e.short || e.org} data-full={e.title}>
+              <i class="org-ico" style={`background:${e.color}`} aria-hidden="true">{e.org[0]}</i><b class="exp-full">{e.title}</b>
+              <small>{e.current && <><i class="dot" aria-hidden="true"></i>Now · </>}{e.org}{e.years && ` · ${e.years}`}</small>
+              <span class="chev" set:html={CHEV} />
+            </button>
+          ))}
+        </div>
+        {P.experience.map((e, i) => (
+          <article class="exp-panel spot" id={`exp-panel-${i}`} role="tabpanel" aria-labelledby={`exp-tab-${i}`} style={`--org:${e.color}`} hidden={i !== 0}>
+            <div class="exp-head"><i class="org-ico" style={`background:${e.color}`} aria-hidden="true">{e.org[0]}</i><span class="exp-org">{e.org}</span>
+              <div class="meta">{e.current && <span class="now">Now</span>}<span>{e.place}</span>{e.years && <span>{e.years}</span>}</div>
+            </div>
+            <h3>{e.title}</h3>
+            <p>{e.text}</p>
+            <ul class="checks">{e.checks.map(c => <li><Fragment set:html={CHECK} /><span>{c}</span></li>)}</ul>
+            <div class="tags">{e.tags.map(t => <span>{t}</span>)}</div>
+            <span class="count" aria-hidden="true">{pad(i + 1)} / {pad(P.experience.length)}</span>
+          </article>
+        ))}
+      </div>
+      <div class="exp-more reveal"><button class="btn btn-ghost btn-sm" type="button" data-open-resume><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>View full resume</button></div>
+    </div>
+    <div class="wrap">
+      <!-- Photo strip and the line under it are hidden for now: remove "hidden" on both to bring them back -->
+      <div class="strip" id="strip" hidden><div class="strip-track" id="strip-track">
+        {[...P.workPhotos, ...P.workPhotos].map((p, i) => i < P.workPhotos.length
+          ? <img src={p.src} alt={p.alt} width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="work" tabindex="0" role="button" aria-label={`View larger: ${p.alt}`}>
+          : <img src={p.src} alt={p.alt} width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="work-copy" tabindex="-1" aria-hidden="true">)}
+      </div></div>
+      <p class="strip-note reveal" hidden>You see the launch. I sweat the details: <b>every page tested, every click checked</b>, so your customers only see a store that works.</p>
     </div>
   </section>
 
-  <section class="sec" id="services">
+  <!-- 04 · Tools -->
+  <section class="sec alt" id="tools">
     <div class="wrap">
-      <div class="sec-head center reveal"><span class="eyebrow"><b>05</b>Pricing</span><h2>Ways to Work <span class="serif">Together</span></h2><p>Clear prices, no surprises. Pick what your store needs today.</p></div>
-      <div class="services" id="services-list"><div class="svc spot reveal" style="--rd:0s">
-    
-    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.6 7.6"></path><circle cx="11" cy="11" r="2"></circle></svg></span>
-    <h3>Shopify Store Design</h3>
-    <p>A store that looks great and feels true to your brand.</p>
-    <div class="price"><small>From</small><b>$199</b></div>
-    <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Custom homepage &amp; product pages</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Mobile-first, on-brand layouts</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Colors, fonts &amp; sections set up</li></ul>
-    <a class="btn btn-ghost" href="https://calendar.app.google/1wCbAVUgq2WPPDJk9" target="_blank" rel="noopener" aria-label="Get started with Shopify Store Design">Get Started <i aria-hidden="true">→</i></a>
-  </div>
-  <div class="svc spot reveal featured" style="--rd:0.08s">
-    <span class="badge">★ Most Popular</span>
-    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></span>
-    <h3>Shopify Speed &amp; Fixes</h3>
-    <p>Make your store faster and fix what's broken.</p>
-    <div class="price"><small>From</small><b>$129</b></div>
-    <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Speed audit &amp; optimization</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Bug, layout &amp; checkout fixes</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Tested across devices</li></ul>
-    <a class="btn btn-accent" href="https://calendar.app.google/1wCbAVUgq2WPPDJk9" target="_blank" rel="noopener" aria-label="Get started with Shopify Speed &amp; Fixes">Get Started <i aria-hidden="true">→</i></a>
-  </div>
-  <div class="svc spot reveal" style="--rd:0.16s">
-    
-    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg></span>
-    <h3>Full Shopify Store Build</h3>
-    <p>Everything from setup to launch, done for you.</p>
-    <div class="price"><small>From</small><b>$600</b></div>
-    <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Theme setup &amp; customization</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Payments, shipping &amp; apps</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Full QA on every device</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Support after launch</li></ul>
-    <a class="btn btn-ghost" href="https://calendar.app.google/1wCbAVUgq2WPPDJk9" target="_blank" rel="noopener" aria-label="Get started with Full Shopify Store Build">Get Started <i aria-hidden="true">→</i></a>
-  </div></div><!--/static-->
-      <p class="svc-note reveal">Not sure which one fits? <a href="" id="svc-call" target="_blank" rel="noopener">Book a free call</a> and we'll figure it out together.</p>
-      <div class="pay reveal" id="pay"><span class="pay-label">Accepted payment methods</span><span class="pay-item"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#1dbf73"></rect><text x="13" y="18" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">fi</text></svg>Fiverr</span><span class="pay-item"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#003087"></rect><text x="11.5" y="19" font-family="Arial,sans-serif" font-size="16" font-style="italic" font-weight="800" fill="#009cde" text-anchor="middle">P</text><text x="14.5" y="17" font-family="Arial,sans-serif" font-size="16" font-style="italic" font-weight="800" fill="#fff" text-anchor="middle">P</text></svg>PayPal</span><span class="pay-item"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#ff4800"></rect><circle cx="13" cy="13" r="6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-dasharray="30 11"></circle></svg>Payoneer</span><span class="pay-item"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#9fe870"></rect><path d="M7 8h9.5l-4.5 4.2h4.6L9.5 19l2.6-5.2H7.6L10.4 11H7z" fill="#163300"></path></svg>Wise</span><span class="pay-item"><svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#111214"></rect><path d="M13 5.5l7 3.6v1.4H6V9.1l7-3.6zM7.5 11.8h2v5.4h-2zm4.5 0h2v5.4h-2zm4.5 0h2v5.4h-2zM6 18.4h14v2H6z" fill="#f0b429"></path></svg>Bank Transfer</span></div><!--/static-->
-    </div>
-  </section>
-
-  <section class="sec alt" id="beyond">
-    <div class="wrap">
-      <div class="sec-head reveal"><span class="eyebrow"><b>06</b>Personal</span><h2>Beyond the <span class="serif">Work</span></h2><p>What keeps me curious, calm and creative once the laptop closes.</p></div>
-      <div class="beyond" id="beyond-list"><div class="bcard reveal">
-    <div class="btext"><span class="kicker">Off the clock</span><h3>Hobbies that change with the season</h3><p>My hobbies never sit still, and I like it that way. One month I'm lost in a book, the next I'm in a BGMI match with friends or packing a bag for somewhere new. Wherever I go, finding the best local food is always part of the plan.</p><ul><li>Reading books</li><li>Playing BGMI</li><li>Traveling and exploring new places</li><li>Hunting down good food</li></ul></div>
-    <div class="mosaic m6"><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-reading-books.jpg" alt="Reading books with a cup of tea" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Reading books with a cup of tea"><figcaption>Reading books with a cup of tea</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-bgmi-gaming.jpg" alt="Playing BGMI on a phone" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Playing BGMI on a phone"><figcaption>Playing BGMI on a phone</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-hiking-sunset.jpg" alt="Rohit Madeshiya on a golden hour hike" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Rohit Madeshiya on a golden hour hike"><figcaption>Rohit Madeshiya on a golden hour hike</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-travel-india.jpg" alt="A morning train journey through India" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: A morning train journey through India"><figcaption>A morning train journey through India</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-exploring-heritage-lane.jpg" alt="Exploring a lantern-lit heritage lane in India" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Exploring a lantern-lit heritage lane in India"><figcaption>Exploring a lantern-lit heritage lane in India</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/shopify-developer-night-desk-setup.jpg" alt="Rohit Madeshiya's late-night desk setup with a laptop, code books and a desk lamp" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Rohit Madeshiya's late-night desk setup with a laptop, code books and a desk lamp"><figcaption>Rohit Madeshiya's late-night desk setup with a laptop, code books and a desk lamp</figcaption></figure></div>
-  </div>
-  <div class="bcard reveal">
-    <div class="btext"><span class="kicker">These days</span><h3>Right now: colors and calm</h3><p>My current favorite is filling colors into ready-made drawing outlines. It's slow, quiet and oddly satisfying, the perfect break from screens. Before that it was the ukulele, and I still pick it up now and then.</p><ul><li>Coloring drawing outlines (current favorite)</li><li>Playing the ukulele (an old love)</li></ul></div>
-    <div class="mosaic"><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-coloring-mandala.jpg" alt="Rohit Madeshiya coloring a mandala drawing outline with colored pencils" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Rohit Madeshiya coloring a mandala drawing outline with colored pencils"><figcaption>Rohit Madeshiya coloring a mandala drawing outline with colored pencils</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/hobby-colored-pencils-floral-coloring-page.jpg" alt="Colored pencils beside a floral coloring page" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Colored pencils beside a floral coloring page"><figcaption>Colored pencils beside a floral coloring page</figcaption></figure><figure class="tile" style="margin:0"><img src="/Assets/rohit-madeshiya-hobby-playing-ukulele.jpg" alt="Rohit Madeshiya playing the ukulele by a sunny window" width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label="View larger: Rohit Madeshiya playing the ukulele by a sunny window"><figcaption>Rohit Madeshiya playing the ukulele by a sunny window</figcaption></figure></div>
-  </div></div><!--/static-->
+      <div class="sec-head reveal"><span class="eyebrow"><b>04</b>Toolkit</span><h2>Tools &amp; <span class="serif">Capabilities</span></h2><p>Modern tools, proven skills and one goal: a store that sells more.</p></div>
+      <div class="bento">
+        <div class="b-tools spot reveal"><h3>Tools I use every day</h3><p class="sub">From building the store to researching what works.</p>
+          <div class="tool-grid" id="tools-top">{P.tools.map(t => <span class="tool"><i style={`background:${t.c}${t.c === "#f7df1e" ? ";color:#111" : ""}`} aria-hidden="true">{shortTool(t.n)}</i>{t.n}</span>)}</div>
+          <p class="tool-note"><span class="live" aria-hidden="true"></span>Always exploring new AI tools to build faster and smarter.</p></div>
+        <div class="b-skills spot reveal" style="--rd:.08s"><h3>What I can do for you</h3><p class="sub">Development, testing and consulting under one roof.</p><div class="skill-cloud" id="tools-bottom">{P.toolTags.map(t => <span>{t}</span>)}</div></div>
+        <div class="b-quote spot reveal" style="--rd:.12s"><p>A developer who tests like a QA engineer, so <span class="serif hl">nothing breaks</span> on launch day.</p><a class="btn btn-ink" href="#services">View Services <span class="arr" aria-hidden="true">→</span></a></div>
+      </div>
     </div>
   </section>
 
@@ -222,80 +341,114 @@ const graph = JSON.parse(JSON.stringify({"@context": "https://schema.org", "@gra
     </div>
   </section>)}
 
-  <section class="sec" id="faq">
+  <!-- 05 · Education: every milestone is rendered; home.js switches between them -->
+  <section class="sec" id="education">
     <div class="wrap">
-      <div class="sec-head center reveal"><span class="eyebrow"><b>07</b>FAQ</span><h2>Questions, <span class="serif">answered</span></h2><p>The things clients usually ask before we start.</p></div>
-      <div class="faq" id="faq-list"><details class="reveal" style="--rd:0s" open="">
-    <summary>Do you work with clients outside India?<i aria-hidden="true"></i></summary>
-    <p class="ans">Yes. I work remotely with brands worldwide. We meet over Google Meet, and you get regular updates so you always know where your store stands.</p>
-  </details>
-  <details class="reveal" style="--rd:0.05s">
-    <summary>Can you fix or improve my existing Shopify store?<i aria-hidden="true"></i></summary>
-    <p class="ans">Absolutely. The Speed &amp; Fixes package covers a speed audit, bug, layout and checkout fixes, all tested across devices before I hand it back.</p>
-  </details>
-  <details class="reveal" style="--rd:0.1s">
-    <summary>What makes you different from other Shopify developers?<i aria-hidden="true"></i></summary>
-    <p class="ans">I'm a developer and a software tester. I tested banking and healthcare apps at Deloitte, so every store I build is checked on every device and browser before a single customer sees it.</p>
-  </details>
-  <details class="reveal" style="--rd:0.15000000000000002s">
-    <summary>How do payments work?<i aria-hidden="true"></i></summary>
-    <p class="ans">You can pay through Fiverr, PayPal, Payoneer, Wise or a bank transfer, whichever suits you best.</p>
-  </details>
-  <details class="reveal" style="--rd:0.2s">
-    <summary>Do you offer support after launch?<i aria-hidden="true"></i></summary>
-    <p class="ans">Yes. Launch day isn't goodbye: I stick around to fix, fine-tune and help your store grow.</p>
-  </details>
-  <details class="reveal" style="--rd:0.25s">
-    <summary>How do we get started?<i aria-hidden="true"></i></summary>
-    <p class="ans">Book a free meeting. We'll talk about your brand, your goals and what your store needs, and I'll suggest the right plan, with no obligation.</p>
-  </details></div><!--/static-->
+      <div class="sec-head center reveal"><span class="eyebrow"><b>05</b>Education</span><h2>Academic <span class="serif">Journey</span></h2><p>Three milestones that taught me how to learn, think and build.</p></div>
+      <div class="edu reveal" id="edu">
+        <div class="edu-rail" role="tablist" aria-label="Academic milestones">
+          <div class="edu-track" aria-hidden="true"><i class="edu-fill"></i></div>
+          {P.education.map((e, i) => (
+            <button class:list={["edu-node", { done: i < P.education.length - 1 }]} role="tab" id={`edu-tab-${i}`} aria-controls={`edu-panel-${i}`} aria-selected={i === P.education.length - 1 ? "true" : "false"} tabindex={i === P.education.length - 1 ? 0 : -1}>
+              <span class="edu-pin" set:html={EDU_ICONS[e.ico] || EDU_ICONS.cap} /><b>{e.when}</b><small>{e.short}</small>
+            </button>
+          ))}
+        </div>
+        {P.education.map((e, i) => (
+          <div class="edu-panel spot" id={`edu-panel-${i}`} role="tabpanel" aria-labelledby={`edu-tab-${i}`} hidden={i !== P.education.length - 1}>
+            <div class="edu-big" aria-hidden="true">{e.when}<small>{e.year}</small></div>
+            <div class="edu-body">
+              <em class="stage">{e.stage}</em>
+              <h3>{e.school}</h3>
+              <p class="edu-deg">{e.degree}</p>
+              {e.story && <p class="edu-story">{e.story}</p>}
+              {(e.learned || []).length > 0 && <ul class="tags" aria-label="What I took away">{e.learned.map(t => <li>{t}</li>)}</ul>}
+            </div>
+            <span class="count" aria-hidden="true">{pad(i + 1)} / {pad(P.education.length)}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
+  <!-- 06 · Beyond the work -->
+  <section class="sec alt" id="beyond">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow"><b>06</b>Personal</span><h2>Beyond the <span class="serif">Work</span></h2><p>What keeps me curious, calm and creative once the laptop closes.</p></div>
+      <div class="beyond" id="beyond-list">
+        {P.beyond.map((b, bi) => (
+          <div class="bcard reveal">
+            <div class="btext"><span class="kicker">{bi === 0 ? "Off the clock" : "These days"}</span><h3>{b.title}</h3><p>{b.text}</p><ul>{b.items.map(it => <li>{it}</li>)}</ul></div>
+            <div class:list={["mosaic", { m6: b.photos.length >= 6 }]}>
+              {b.photos.map(p => p.src
+                ? <figure class="tile" style="margin:0"><img src={p.src} alt={p.alt} width="900" height="675" loading="lazy" decoding="async" class="zoomable" data-group="beyond" tabindex="0" role="button" aria-label={`View larger: ${p.alt}`}><figcaption>{p.alt}</figcaption></figure>
+                : <div class="tile" style={`background:${p.c}`} aria-hidden="true"></div>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
+  <!-- 07 · FAQ -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head center reveal"><span class="eyebrow"><b>07</b>FAQ</span><h2>Questions, <span class="serif">answered</span></h2><p>The things clients usually ask before we start.</p></div>
+      <div class="faq" id="faq-list">
+        {P.faq.map((f, i) => (
+          <details class="reveal" style={`--rd:${i * 0.05}s`} open={i === 0}>
+            <summary>{f.q}<i aria-hidden="true"></i></summary>
+            <p class="ans">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <div class="words" aria-hidden="true"><div class="words-track" id="marquee"><span>Staying Curious</span><span>Deep Research</span><span>Coffee</span><span>Flow State</span><span>Learning Every Day</span><span>Exploring AI</span><span>Staying Curious</span><span>Deep Research</span><span>Coffee</span><span>Flow State</span><span>Learning Every Day</span><span>Exploring AI</span></div><!--/static--></div>
-
+  <div class="words" aria-hidden="true"><div class="words-track" id="marquee">{[...P.marquee, ...P.marquee].map(w => <span>{w}</span>)}</div></div>
 
   <Fragment slot="after">
 <div class="resume-view" id="resume-view" role="dialog" aria-modal="true" aria-labelledby="rv-name" hidden>
   <div class="rv-bar">
-    <div class="rv-title"><span class="rv-dot" aria-hidden="true"></span><b id="rv-name"></b><span>· Resume</span></div>
+    <div class="rv-title"><span class="rv-dot" aria-hidden="true"></span><b id="rv-name">{P.name}</b><span>· Resume</span></div>
     <div class="rv-actions">
       <button class="btn btn-ink btn-sm" id="rv-download" type="button">↓ <span class="rv-dl-text">Download PDF</span></button>
       <button class="close" id="rv-close" type="button" aria-label="Close resume">✕</button>
     </div>
   </div>
-  <div class="paper-wrap"><article class="paper" id="paper"><header class="r-head">
-    <div><p class="r-name">Rohit Madeshiya</p><p class="r-role">Shopify Consultant · Developer · Tester</p></div>
-    <div class="r-contact">
-      <div><i>✉</i>itsrohitmadeshiya@gmail.com</div>
-      <div><i>⌖</i>Yamunanagar, Haryana, India · Open to remote work</div>
-    </div>
-  </header>
-  <section class="r-sec"><h2>Professional Summary</h2><p>Shopify consultant, developer and tester. I started out building responsive websites with HTML, CSS, React and Bootstrap, then tested banking and healthcare applications at Deloitte. Today I bring both sides together: I build Shopify stores and test them like a QA engineer, so they look great, load fast and just work.</p></section>
-  <section class="r-sec"><h2>Professional Experience</h2>
-    <div class="r-item"><div class="r-top"><h3>Shopify Consultant, Developer &amp; Tester</h3><span class="r-when">Present</span></div><div class="r-org">Freelance · Remote</div><ul><li>Advise brands on store strategy, apps and the right Shopify setup for their goals.</li><li>Set up and customize stores: themes, custom sections, app integrations, payments and shipping.</li><li>Optimize store speed and conversion.</li><li>Run full QA on every device and browser before launch, and support stores after go-live.</li></ul></div><div class="r-item"><div class="r-top"><h3>Software Tester</h3><span class="r-when"></span></div><div class="r-org">Deloitte · Banking &amp; Healthcare</div><ul><li>Tested banking and healthcare applications through functional, regression and end-to-end testing.</li><li>Wrote and ran detailed test cases for critical journeys like payments, accounts and patient records.</li><li>Found, logged and tracked defects through to the fix.</li><li>Worked closely with developers and business teams to ship reliable releases.</li></ul></div><div class="r-item"><div class="r-top"><h3>Web Developer</h3><span class="r-when"></span></div><div class="r-org">Freelance · Remote</div><ul><li>Built responsive websites and web pages from scratch with HTML, CSS, React and Bootstrap.</li><li>Turned designs into pixel-perfect, mobile-first layouts with reusable React components.</li><li>Cleaned up and optimized code for faster, easier-to-maintain sites.</li></ul></div>
-  </section>
-  <section class="r-sec"><h2>Core Skills</h2>
-    <div class="r-skills"><div><b>Shopify Consulting</b><span>Store strategy, app selection, store audits and the right setup for each brand.</span></div><div><b>Shopify Development</b><span>Store setup, theme development, custom sections, app integration, payments and shipping.</span></div><div><b>Speed &amp; Conversion</b><span>Speed optimization, conversion optimization, mobile-first design and technical SEO.</span></div><div><b>Quality Testing</b><span>Functional, regression and cross-browser testing, test cases and bug fixing.</span></div></div>
-  </section>
-  <section class="r-sec"><h2>Tools</h2>
-    <div class="r-tools"><div><b>Platform:</b> Shopify, Liquid</div><div><b>Development:</b> HTML, CSS, JavaScript, React, Bootstrap</div><div><b>AI &amp; Research:</b> ChatGPT, Claude, Google Search</div><div><b>Testing:</b> Manual, functional, regression and cross-browser testing</div></div>
-  </section>
-  <section class="r-sec"><h2>Education</h2>
-    <div class="r-rows"><div class="r-row"><span><b>New Happy Senior Secondary School</b> · Secondary Education</span><span>Passed 2017</span></div><div class="r-row"><span><b>New Happy Senior Secondary School</b> · Senior Secondary Education</span><span>Passed 2019</span></div><div class="r-row"><span><b>Tilak Raj Chadha Institute of Management and Technology (TIMT)</b> · BCA, Kurukshetra University</span><span>2019 – 2022</span></div></div>
-  </section>
-  <section class="r-sec"><h2>Awards &amp; Recognition</h2>
-    <div class="r-rows"><div class="r-row"><span><b>6 Awards at Deloitte</b> · 4 Applause Awards and 2 Support Awards for hard work and dedication</span><span></span></div><div class="r-row"><span><b>Certifications</b> · Cleared all required certifications within the given timeline</span><span></span></div></div>
-  </section>
-  <section class="r-sec"><h2>Languages</h2>
-    <div class="r-langs"><span><b>English</b> · Fluent</span><span><b>Hindi</b> · Native</span></div>
-  </section></article><!--/static--></div>
+  <div class="paper-wrap"><article class="paper" id="paper">
+    <header class="r-head">
+      <div><p class="r-name">{P.name}</p><p class="r-role">{P.resume.headline}</p></div>
+      <div class="r-contact">
+        <div><i>✉</i>{P.email}</div>
+        <div><i>⌖</i>{P.resume.location}</div>
+      </div>
+    </header>
+    <section class="r-sec"><h2>Professional Summary</h2><p>{P.resume.summary}</p></section>
+    <section class="r-sec"><h2>Professional Experience</h2>
+      {P.resume.jobs.map(j => <div class="r-item"><div class="r-top"><h3>{j.title}</h3><span class="r-when">{j.when}</span></div><div class="r-org">{j.org}</div><ul>{j.bullets.map(b => <li>{b}</li>)}</ul></div>)}
+    </section>
+    <section class="r-sec"><h2>Core Skills</h2>
+      <div class="r-skills">{P.resume.skills.map(k => <div><b>{k.title}</b><span>{k.text}</span></div>)}</div>
+    </section>
+    <section class="r-sec"><h2>Tools</h2>
+      <div class="r-tools">{P.resume.tools.map(t => <div><b>{t.group}:</b> {t.list}</div>)}</div>
+    </section>
+    <section class="r-sec"><h2>Education</h2>
+      <div class="r-rows">{P.education.map(e => <div class="r-row"><span><b>{e.school}</b> · {e.degree}</span><span>{e.year}</span></div>)}</div>
+    </section>
+    <section class="r-sec"><h2>Awards &amp; Recognition</h2>
+      <div class="r-rows">{P.resume.honors.map(h => <div class="r-row"><span><b>{h.name}</b> · {h.detail}</span><span>{h.year}</span></div>)}</div>
+    </section>
+    <section class="r-sec"><h2>Languages</h2>
+      <div class="r-langs">{P.resume.languages.map(l => <span><b>{l.name}</b> · {l.level}</span>)}</div>
+    </section>
+  </article></div>
 </div>
 
-
-
+<script is:inline define:vars={{ HOME: { name: P.name, roleIcons: Object.fromEntries(P.roles.map(r => [r.icon, ROLE_ICONS[r.icon]])), timeZone: P.timeZone, resumePdf: P.resumePdf } }}>
+  window.HOME = HOME;
+</script>
 <script is:inline src="/js/home.js"></script>
   </Fragment>
 </Base>

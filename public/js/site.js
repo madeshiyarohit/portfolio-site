@@ -33,12 +33,12 @@
 
   const year = $("year"); if (year) year.textContent = new Date().getFullYear();
 
-  /* Theme toggle: dark by default; a visitor's choice is remembered. */
+  /* Theme toggle: light by default; a visitor's choice is remembered. */
   const ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
     moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
   };
-  const currentTheme = () => document.documentElement.dataset.theme || "dark";
+  const currentTheme = () => document.documentElement.dataset.theme || "light";
   function syncThemeUI() {
     const dark = currentTheme() === "dark", btn = $("theme-toggle");
     btn.innerHTML = dark ? ICONS.sun : ICONS.moon;
@@ -59,8 +59,10 @@
   let lbSet = [], lbAt = 0;
   function showPhoto(i) {
     lbAt = (i + lbSet.length) % lbSet.length;
-    const img = lbSet[lbAt], src = img.dataset.full || img.getAttribute("src");
-    const big = src.replace(/\.jpg$/, "-lg.jpg");
+    const img = lbSet[lbAt], src = img.getAttribute("src");
+    const big = src.replace(/\.(jpg|webp)$/, "-lg.$1");
+    lbImg.classList.add("is-loading");
+    lbImg.onload = () => lbImg.classList.remove("is-loading");
     lbImg.onerror = () => { lbImg.onerror = null; lbImg.src = src; };
     lbImg.src = big;
     lbImg.alt = img.alt;
@@ -186,10 +188,10 @@
     { g: "Actions", t: "Book a free meeting", i: "cal", k: "meet call calendar", run: () => open(BOOKING, "_blank", "noopener") },
     { g: "Actions", t: "Send me a message", i: "mail", k: "contact form email", run: () => { location.href = "/contact/"; } },
     { g: "Actions", t: "Copy my email", i: "mail", k: "contact email", run: copyEmail },
-    { g: "Actions", t: "Open resume", i: "doc", k: "cv pdf", run: () => { $("resume") && onHome ? $("resume").click() : (location.href = "/?resume"); } },
+    { g: "Actions", t: "Open resume", i: "doc", k: "cv pdf", run: () => { window.openResume ? window.openResume() : (location.href = "/?resume"); } },
     { g: "Actions", t: "Switch light / dark theme", i: "sun", k: "theme mode", run: () => $("theme-toggle").click() },
     ...pages.map(([href, t]) => ({ g: "Pages", t, i: "page", k: href, run: () => { location.href = href; } })),
-    ...[["top", "Home"], ["experience", "Career Experience"], ["education", "Academic Journey"], ["tools", "Tools & Capabilities"], ["process", "How I Work"], ["services", "Services & Pricing"], ["beyond", "Beyond the Work"], ["faq", "FAQ"]]
+    ...[["top", "Home"], ["services", "Services & Pricing"], ["process", "How I Work"], ["experience", "Career Experience"], ["tools", "Tools & Capabilities"], ["education", "Academic Journey"], ["beyond", "Beyond the Work"], ["faq", "FAQ"]]
       .map(([id, t]) => ({ g: "On the homepage", t, i: "go", k: id, run: goTo(id) }))
   ];
   const pal = $("palette"), palIn = $("pal-input"), palList = $("pal-list");

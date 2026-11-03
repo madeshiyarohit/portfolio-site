@@ -4,7 +4,7 @@ const { post, wide = false, headingLevel = "h3" } = Astro.props;
 const d = post.data;
 const H = headingLevel;
 ---
-<a class:list={["bcard2 spot reveal", { wide }]} href={`/blog/${post.id}/`} data-tags={d.tags.join("|")}>
+<a class:list={["bcard2 spot reveal", { wide }]} href={`/blog/${post.id}/`} target="_blank" rel="noopener" data-tags={d.tags.join("|")}>
   {d.draft && <span class="draft-badge">Draft</span>}
   <div class="thumb">
     {d.cover
@@ -18,4 +18,5 @@ const H = headingLevel;
     <div class="card-meta"><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time><span>·</span><span>{readingTime(post.body)} min read</span></div>
   </div>
   <span class="card-go" aria-hidden="true">→</span>
+  <span class="sr-only">(opens in a new tab)</span>
 </a>

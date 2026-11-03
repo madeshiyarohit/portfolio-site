@@ -6,14 +6,13 @@ A fast, SEO-friendly portfolio built with [Astro](https://astro.build), publishe
 
 | You want to change… | Edit this |
 |---|---|
-| Domain, email, booking link, social links, contact form key | `src/site.config.mjs` |
-| Homepage text (experience, education, services, prices, FAQ, resume) | the `PROFILE` section at the top of `public/js/home.js` |
+| Domain, email, booking link, social links, contact form key, WhatsApp, analytics | `src/site.config.mjs` |
+| Homepage text (experience, education, services, prices, delivery times, FAQ, resume) | `src/data/profile.js` (one file; everything else updates from it) |
 | Blog posts | `src/content/blog/` (or the admin panel) |
 | Projects / case studies | `src/content/projects/` (or the admin panel) |
 | Images | `public/Assets/` (uploads from the admin panel go to `public/Assets/uploads/`) |
 | Colors, fonts, layout | `src/styles/site.css` |
 
-> If you change services, prices or the FAQ in `home.js`, also update the matching text in `src/pages/index.astro` (the ready-made copy search engines read and the structured data at the top).
 
 ## Going live on GitHub Pages (one time)
 

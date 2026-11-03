@@ -29,9 +29,10 @@ const ld = [
     { "@type": "ListItem", position: 3, name: d.title, item: url } ] }
 ];
 const shareText = encodeURIComponent(d.title);
+const withName = t => (t.length + SITE.name.length + 3 <= 62 ? `${t} | ${SITE.name}` : t);
 const shareUrl = encodeURIComponent(url);
 ---
-<Base page="post" type="article" title={`${d.title} | ${SITE.name}`} description={d.description}
+<Base page="post" type="article" title={withName(d.seoTitle || d.title)} description={d.description}
   image={d.cover || SITE.shareImage} imageAlt={d.coverAlt || d.title} published={d.date} modified={d.updated} jsonLd={ld} noindex={d.draft}>
   <article>
     <header class="page-head">
@@ -61,7 +62,7 @@ const shareUrl = encodeURIComponent(url);
             <button type="button" id="copy-link" aria-label="Copy link to this article" data-url={url}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></button>
           </div>
           <div class="author">
-            <img src="/Assets/rohit-madeshiya-shopify-expert-hero.jpg" alt={SITE.name} width="72" height="72" loading="lazy">
+            <img src="/Assets/rohit-madeshiya-shopify-expert-hero.webp" alt={SITE.name} width="72" height="72" loading="lazy">
             <div><b>Written by {SITE.name}</b><p>Shopify consultant, developer and tester. I build Shopify stores that look great, load fast and are tested before a single customer sees them.</p></div>
           </div>
           <nav class="pager" aria-label="More articles">

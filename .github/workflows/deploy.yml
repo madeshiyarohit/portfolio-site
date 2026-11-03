@@ -34,3 +34,15 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+      # Tell Bing and other IndexNow search engines about every page, so changes are picked up within minutes.
+      # The key must match src/site.config.mjs (indexNowKey) and the file public/<key>.txt.
+      - name: Ping IndexNow
+        continue-on-error: true
+        env:
+          KEY: 7aba602ff8a8d080ea660f36edad868e
+          HOST: flexiroot.in
+        run: |
+          sleep 20
+          URLS=$(curl -fsS "https://$HOST/sitemap.xml" | grep -o '<loc>[^<]*</loc>' | sed 's/<[^>]*>//g' | jq -R . | jq -sc .)
+          curl -sS -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"$HOST\",\"key\":\"$KEY\",\"keyLocation\":\"https://$HOST/$KEY.txt\",\"urlList\":$URLS}" -w "IndexNow response: %{http_code}\n"

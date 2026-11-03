@@ -15,8 +15,10 @@ const {
   noindex = false,
   page = "",
   published,
-  modified
+  modified,
+  preloadImage
 } = Astro.props;
+const isDefaultImage = image === SITE.shareImage;
 
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const imageUrl = new URL(image, SITE.url).href;
@@ -24,19 +26,22 @@ const hasProjects = (await getProjects()).length > 0;
 const hasPosts = (await getPosts()).length > 0;
 
 // Menu: section links jump to the homepage; Projects and Blog appear once they have content.
-const links = [
-  ["/#experience", "Experience"],
+// Menu, in two groups: sections of the homepage first, then the separate pages.
+const sectionLinks = [
   ["/#services", "Services"],
+  ["/#experience", "Experience"],
+  ["/#beyond", "Beyond Work"]
+];
+const pageLinks = [
   hasProjects && ["/projects/", "Projects"],
   hasPosts && ["/blog/", "Blog"],
-  ["/#beyond", "Beyond Work"],
   ["/contact/", "Contact"]
 ].filter(Boolean);
 const pages = [hasProjects && ["/projects/", "All projects"], hasPosts && ["/blog/", "Blog"], ["/contact/", "Contact"]].filter(Boolean);
 const ld = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 ---
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -44,7 +49,7 @@ const ld = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 <meta name="description" content={description}>
 <meta name="author" content={SITE.name}>
 <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-snippet:-1, max-image-preview:large"}>
-<link rel="canonical" href={canonical}>
+{page !== "404" && <link rel="canonical" href={canonical}>}
 <meta property="og:type" content={type}>
 <meta property="og:site_name" content={SITE.name}>
 <meta property="og:locale" content="en_US">
@@ -53,6 +58,7 @@ const ld = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 <meta property="og:description" content={description}>
 <meta property="og:image" content={imageUrl}>
 <meta property="og:image:alt" content={imageAlt}>
+{isDefaultImage && <><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"></>}
 {published && <meta property="article:published_time" content={published.toISOString()}>}
 {modified && <meta property="article:modified_time" content={modified.toISOString()}>}
 <meta name="twitter:card" content="summary_large_image">
@@ -60,27 +66,68 @@ const ld = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
 <meta name="twitter:description" content={description}>
 <meta name="twitter:image" content={imageUrl}>
 <meta name="twitter:image:alt" content={imageAlt}>
-<meta name="theme-color" content="#09090b">
+<meta name="theme-color" content="#fafaf7">
 <meta name="geo.region" content="IN-HR">
 <meta name="geo.placename" content="Yamunanagar, Haryana, India">
 <link rel="icon" type="image/png" sizes="32x32" href="/Assets/rohit-madeshiya-favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/Assets/rohit-madeshiya-favicon-512.png">
 <link rel="apple-touch-icon" href="/Assets/rohit-madeshiya-apple-touch-icon.png">
 <link rel="sitemap" href="/sitemap.xml">
+<link rel="alternate" type="application/rss+xml" title={`${SITE.name}: Shopify Blog`} href="/rss.xml">
+<link rel="manifest" href="/site.webmanifest">
+{preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high">}
 {ld.map(item => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
 <script is:inline>
 /* Apply the saved theme before the page paints, so there is no flash. */
-let t = "dark"; // dark is the default; a visitor's own choice from the toggle wins
+let t = "light"; // light is the default; a visitor's own choice from the toggle wins
 try { const saved = localStorage.getItem("theme"); if (saved === "light" || saved === "dark") t = saved; } catch (e) {}
 document.documentElement.dataset.theme = t;
 document.documentElement.classList.add("js");
+/* Loader: only appears if the page is still loading after 300 ms, then fades out once everything is ready.
+   On a normal fast load visitors never see it. A 7-second cap makes sure it can never get stuck. */
+(function () {
+  const root = document.documentElement;
+  let ready = false;
+  const done = () => { ready = true; root.classList.remove("slow"); };
+  setTimeout(() => { if (!ready) root.classList.add("slow"); }, 300);
+  // Hide once the page structure and styles are ready; images then show their own skeletons.
+  addEventListener("DOMContentLoaded", done);
+  addEventListener("load", done);
+  addEventListener("pageshow", e => { if (e.persisted) done(); });
+  // Skeletons: every image starts as a shimmering placeholder (CSS) and gets .ok the moment it has loaded.
+  const ok = e => { if (e.target.tagName === "IMG") e.target.classList.add("ok"); };
+  document.addEventListener("load", ok, true);
+  document.addEventListener("error", ok, true);
+  setTimeout(done, 7000);
+})();
 </script>
+<style is:inline>
+/* Loader styles are inline so they work even before the main stylesheet arrives. */
+.loader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; align-content: center; gap: 34px; background: #fafaf7; color: #121214; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s ease, visibility .45s; }
+[data-theme="dark"] .loader { background: #09090b; color: #f4f4f6; }
+.slow .loader { opacity: 1; visibility: visible; pointer-events: auto; }
+.loader-mark { position: relative; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 20px; background: #f5b82e; color: #141210; font: 800 28px/1 "Plus Jakarta Sans", system-ui, sans-serif; animation: loader-bob 1.4s ease-in-out infinite; }
+.loader-mark::after { content: ""; position: absolute; inset: -10px; border-radius: 26px; border: 2px solid transparent; border-top-color: #f5b82e; border-right-color: #f5b82e; animation: loader-spin .9s linear infinite; }
+.loader-text { font: 600 13px/1 "Plus Jakarta Sans", system-ui, sans-serif; letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+.loader-bar { width: 140px; height: 3px; border-radius: 3px; background: rgba(128,128,128,.2); overflow: hidden; }
+.loader-bar i { display: block; width: 40%; height: 100%; border-radius: inherit; background: #f5b82e; animation: loader-slide 1.1s ease-in-out infinite; }
+@keyframes loader-spin { to { transform: rotate(360deg); } }
+@keyframes loader-bob { 50% { transform: translateY(-4px); } }
+@keyframes loader-slide { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+@media (prefers-reduced-motion: reduce) { .loader-mark, .loader-mark::after, .loader-bar i { animation: none; } }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Mrs+Saint+Delafield&display=swap">
+{SITE.cfAnalyticsToken && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: SITE.cfAnalyticsToken })}></script>}
 <slot name="head" />
 </head>
 <body data-page={page} data-email={SITE.email} data-booking={SITE.bookingUrl} data-pages={JSON.stringify(pages)}>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-mark">{SITE.firstName[0]}</div>
+  <div class="loader-bar"><i></i></div>
+  <div class="loader-text">Loading</div>
+</div>
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
@@ -89,7 +136,9 @@ document.documentElement.classList.add("js");
     <div class="nav-inner">
       <a href="/" class="logo" aria-label="Home"><span class="logo-mark" id="logo-mark">{SITE.firstName[0]}</span><span id="logo-name">{SITE.firstName}.</span></a>
       <div class="menu" id="menu">
-        {links.map(([href, label]) => <a href={href}>{label}</a>)}
+        {sectionLinks.map(([href, label]) => <a href={href}>{label}</a>)}
+        <span class="menu-sep" aria-hidden="true"></span>
+        {pageLinks.map(([href, label]) => <a href={href}>{label}</a>)}
       </div>
       <div class="nav-right">
         <button class="kbd-btn" id="pal-open" type="button" aria-label="Search and quick actions" title="Search and quick actions">
@@ -98,9 +147,7 @@ document.documentElement.classList.add("js");
         </button>
         <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"></button>
         <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch theme"></button>
-        {page === "home"
-          ? <button class="btn btn-ink btn-sm" id="resume" type="button" data-open-resume><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span class="resume-label">Resume</span></button>
-          : <a class="btn btn-ink btn-sm" id="resume" href="/?resume"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span class="resume-label">Resume</span></a>}
+        <a class="btn btn-ink btn-sm nav-cta" href={SITE.bookingUrl} target="_blank" rel="noopener" aria-label="Book a free call"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span class="nav-cta-label">Book a Call</span></a>
       </div>
     </div>
   </div>
@@ -114,7 +161,7 @@ document.documentElement.classList.add("js");
       <img class="contact-photo" src={SITE.footerPhoto} alt="Rohit Madeshiya, Shopify expert, with a laptop and a cup of coffee" width="1100" height="733" loading="lazy" decoding="async">
       <span class="eyebrow">Let's talk</span>
       <h2>Good ideas. Bad ideas.<br> <span class="serif">All welcome.</span></h2>
-      <p>Send them all. We'll shape it together.</p>
+      <p>Send them all. We'll shape it together. <span class="foot-reply">I reply within 24 hours.</span></p>
       <div class="contact-actions">
         <a class="btn btn-accent" id="cta2" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a Free Meeting <span class="arr" aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="/contact/">
@@ -132,6 +179,9 @@ document.documentElement.classList.add("js");
       <div class="signature" id="signature">{SITE.name}</div>
       <div class="contact-foot">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v3M12 3v3"/></svg>Made with curiosity, care &amp; coffee.</span>
+        {page === "home"
+          ? <button class="foot-link" type="button" data-open-resume>View resume</button>
+          : <a class="foot-link" href="/?resume">View resume</a>}
         <span id="copyright">© <span id="year">{new Date().getFullYear()}</span> {SITE.name}. All rights reserved.</span>
       </div>
     </footer>

@@ -24,7 +24,7 @@ const ld = [
     { "@type": "ListItem", position: 3, name: d.title, item: url } ] }
 ];
 ---
-<Base page="project" type="article" title={`${d.title}: Shopify Case Study | ${SITE.name}`} description={d.summary}
+<Base page="project" type="article" title={d.seoTitle || `${d.title}: Shopify Case Study`} description={d.summary}
   image={d.cover} imageAlt={d.coverAlt || d.title} jsonLd={ld} noindex={d.draft}>
   <article>
     <header class="page-head">

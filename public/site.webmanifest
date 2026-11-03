@@ -1,0 +1,13 @@
+{
+  "name": "Rohit Madeshiya – Shopify Expert & Developer",
+  "short_name": "Rohit",
+  "description": "Shopify stores that look great, load fast and are tested before launch.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fafaf7",
+  "theme_color": "#fafaf7",
+  "icons": [
+    { "src": "/Assets/rohit-madeshiya-favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/Assets/rohit-madeshiya-apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
