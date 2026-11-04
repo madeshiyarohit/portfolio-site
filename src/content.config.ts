@@ -37,6 +37,8 @@ const projects = defineCollection({
     results: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
     gallery: z.array(z.object({ src: z.string(), alt: z.string().optional() })).default([]),
     featured: z.boolean().default(false),
+    // true = a study of someone else's store (not client work). Shown with a "Reference study" label.
+    reference: z.boolean().default(false),
     draft: z.boolean().default(false)
   })
 });

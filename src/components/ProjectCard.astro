@@ -5,6 +5,7 @@ const H = headingLevel;
 ---
 <a class="pcard2 spot reveal" href={`/projects/${project.id}/`} target="_blank" rel="noopener">
   {d.draft && <span class="draft-badge">Draft</span>}
+  {d.reference && <span class="ref-badge">Reference study</span>}
   <div class="thumb">
     <img src={d.cover} alt={d.coverAlt || `${d.title}, a Shopify project for ${d.client}`} width="1200" height="750" loading="lazy" decoding="async">
   </div>

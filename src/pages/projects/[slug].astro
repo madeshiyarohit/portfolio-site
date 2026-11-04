@@ -16,8 +16,11 @@ const url = new URL(`/projects/${project.id}/`, SITE.url).href;
 const ld = [
   { "@context": "https://schema.org", "@type": "CreativeWork", name: d.title, headline: d.title, description: d.summary, url,
     image: new URL(d.cover, SITE.url).href, dateCreated: d.date.toISOString(), keywords: d.services.join(", "),
-    creator: { "@type": "Person", name: SITE.name, url: SITE.url + "/" },
-    ...(d.client ? { sourceOrganization: { "@type": "Organization", name: d.client, ...(d.liveUrl ? { url: d.liveUrl } : {}) } } : {}) },
+    ...(d.reference
+      // A study of another brand's store: Rohit is the author of the analysis, not the builder of the store.
+      ? { author: { "@type": "Person", name: SITE.name, url: SITE.url + "/" }, about: { "@type": "Organization", name: d.client.replace(/\s*\(reference only\)/i, ""), ...(d.liveUrl ? { url: d.liveUrl } : {}) } }
+      : { creator: { "@type": "Person", name: SITE.name, url: SITE.url + "/" },
+          ...(d.client ? { sourceOrganization: { "@type": "Organization", name: d.client, ...(d.liveUrl ? { url: d.liveUrl } : {}) } } : {}) }) },
   { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
     { "@type": "ListItem", position: 2, name: "Projects", item: new URL("/projects/", SITE.url).href },
@@ -33,10 +36,10 @@ const ld = [
         <h1 class="reveal" style="font-size:clamp(38px,6vw,76px);max-width:18ch">{d.title}</h1>
         <p class="lead reveal">{d.summary}</p>
         <div class="case-meta reveal">
-          <div><small>Client</small><b>{d.client}</b></div>
+          <div><small>{d.reference ? "Brand studied" : "Client"}</small><b>{d.client}</b></div>
           {d.industry && <div><small>Industry</small><b>{d.industry}</b></div>}
           <div><small>Year</small><b>{d.date.getUTCFullYear()}</b></div>
-          {d.services.length > 0 && <div><small>What I did</small><b>{d.services.join(", ")}</b></div>}
+          {d.services.length > 0 && <div><small>{d.reference ? "Focus areas" : "What I did"}</small><b>{d.services.join(", ")}</b></div>}
         </div>
         {d.liveUrl && <div style="margin-top:22px" class="reveal"><a class="btn btn-ghost" href={d.liveUrl} target="_blank" rel="noopener">Visit the live store <span class="arr" aria-hidden="true">↗</span></a></div>}
       </div>
@@ -47,7 +50,7 @@ const ld = [
       <div class="case-body" style="margin-top:clamp(36px,5vw,56px)"><div class="prose"><Content /></div></div>
       {d.gallery.length > 0 && <div class="gallery">{d.gallery.map(g => <img src={g.src} alt={g.alt || d.title} class="zoomable reveal" data-group="case" tabindex="0" role="button" loading="lazy" decoding="async" width="1200" height="900">)}</div>}
       <div class="cta-band reveal">
-        <h2>Want results like <span class="serif">these?</span></h2>
+        <h2>{d.reference ? <>Want a store this <span class="serif">well thought out?</span></> : <>Want results like <span class="serif">these?</span></>}</h2>
         <p>Tell me about your store and what you want to improve. The first meeting is free.</p>
         <div class="contact-actions" style="margin-top:6px"><a class="btn btn-accent" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a Free Meeting <span class="arr" aria-hidden="true">→</span></a><a class="btn btn-ghost" href="/contact/" style="color:#f4f4f6;border-color:rgba(255,255,255,.25)">Send a Message</a></div>
       </div>

@@ -272,7 +272,7 @@ const ICON_LOOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
   {projects.length > 0 && (
   <section class="sec" id="projects">
     <div class="wrap">
-      <div class="sec-head reveal"><span class="eyebrow"><b>✦</b>Work</span><h2>Recent <span class="serif">Projects</span></h2><p>Real stores. Real brands. Built to look good and sell even better.</p></div>
+      <div class="sec-head reveal"><span class="eyebrow"><b>✦</b>Work</span><h2>{projects.every(p => p.data.reference) ? <>Shopify <span class="serif">Case Studies</span></> : <>Recent <span class="serif">Projects</span></>}</h2><p>{projects.every(p => p.data.reference) ? "What great Shopify stores do well, and what I\'d test next." : "Real stores. Real brands. Built to look good and sell even better."}</p></div>
       <div class="card-grid">{projects.slice(0, 3).map(p => <ProjectCard project={p} />)}</div>
       {projects.length > 3 && <div class="sec-foot"><a class="btn btn-ghost" href="/projects/">View all projects <span class="arr" aria-hidden="true">→</span></a></div>}
     </div>

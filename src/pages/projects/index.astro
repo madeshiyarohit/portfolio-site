@@ -5,6 +5,7 @@ import { SITE } from "../../site.config.mjs";
 import { getProjects } from "../../lib/content.js";
 
 const projects = await getProjects();
+const allRef = projects.length > 0 && projects.every(p => p.data.reference);
 const ld = [
   { "@context": "https://schema.org", "@type": "CollectionPage", name: "Shopify Projects & Case Studies", url: new URL("/projects/", SITE.url).href,
     mainEntity: { "@type": "ItemList", itemListElement: projects.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.data.title, url: new URL(`/projects/${p.id}/`, SITE.url).href })) } },
@@ -20,7 +21,7 @@ const ld = [
     <div class="wrap">
       <ol class="crumbs reveal"><li><a href="/">Home</a></li><li aria-current="page">Projects</li></ol>
       <h1 class="reveal">Selected <span class="serif hl">Work</span></h1>
-      <p class="lead reveal">Real stores. Real brands. Built to look good and sell even better. Here's what I did for each one.</p>
+      <p class="lead reveal">{allRef ? "Case studies of well-known Shopify stores: what they do well, and what I'd test next." : "Real stores. Real brands. Built to look good and sell even better. Here's what I did for each one."}</p>
     </div>
   </header>
   <section class="sec" style="padding-top:0">
