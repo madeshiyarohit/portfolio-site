@@ -1,17 +1,18 @@
 ---
 title: Why your Shopify store is slow (and the fixes that actually matter)
 seoTitle: "Why Your Shopify Store Is Slow (and How to Fix It)"
-description: Speed scores can be confusing. Here are the real reasons most Shopify stores feel slow, and the fixes worth your time, in order of impact.
-date: 2026-10-24
+description: Speed scores can be confusing. Here are the usual reasons a Shopify store feels slow, and the fixes worth checking first.
+date: 2026-11-04
+updated: 2026-11-06
 cover: /Assets/shopify-theme-development-coding.webp
 coverAlt: Shopify theme code open on a laptop during a speed optimization
 tags: [Speed, Shopify Tips]
 draft: false
 ---
 
-"My store is slow" is one of the most common messages I get. Usually it comes with a screenshot of a speed score in red and a list of fifty warnings that nobody understands.
+"My store is slow" is a common complaint from Shopify store owners. It's easy to see why: speed tools hand you a score in red and a long list of warnings that are hard to understand.
 
-Here's the honest truth: you don't need to fix all fifty. In most Shopify stores, a handful of problems cause most of the slowness. Fix those, and the store *feels* fast to real people, which is what actually matters.
+You don't need to fix every warning. Often, a handful of problems cause most of the slowness. Fix those first, because how fast the store *feels* to real people is what actually matters.
 
 ## First, measure the right thing
 
@@ -25,29 +26,29 @@ What I care about most:
 
 Open your store on your own phone, on mobile data, with the cache cleared. If it feels sluggish to you, it feels sluggish to your customers, whatever the score says.
 
-## 1. Images are almost always the biggest problem
+## 1. Images are often the first place to look
 
-A single product photo straight from a camera can be several megabytes. Multiply that by a homepage slider, a few collection images and a lifestyle banner, and the page is enormous.
+A single product photo straight from a camera can be several megabytes. Shopify can [resize images and offer smaller versions to different screens](https://shopify.dev/docs/storefronts/themes/best-practices/performance/use-responsive-images), but only if the theme uses this properly. A homepage slider, large banners and custom sections can still add a lot of weight.
 
 What helps:
 
 - Upload images at a sensible size (around 2000 px wide is plenty for most product photos).
 - Compress them before uploading. Free tools like Squoosh or TinyPNG work well.
-- Avoid huge sliders on the homepage. One strong image beats five rotating ones, for speed *and* for sales.
+- Avoid huge sliders on the homepage. One strong image loads less than five rotating ones.
 
 ## 2. Apps you forgot you installed
 
-Many apps add code to every page of your store, not just the page where you use them. Some leave that code behind even after you uninstall them.
+Some apps add code to every page of your store, not just the page where you use them. Apps that wrote code directly into theme files, mostly older ones, can also leave it behind after you uninstall them.
 
-I start every speed project with an app audit: what's installed, what's actually used, and what's still loading even though it was removed months ago. Removing two or three unused apps often makes a bigger difference than any clever technical trick.
+So an app audit is a good first step: what's installed, what's actually used, and what's still loading even though the app was removed. Removing apps you don't use is one of the simplest fixes to try.
 
 ## 3. Too many fonts and font weights
 
-Every font family and every weight (regular, medium, bold, italic) is another file to download. Two font families with a few weights is plenty. Your theme's built-in fonts are usually the fastest choice.
+Every font family and every weight (regular, medium, bold, italic) is another file to download. Two font families with a few weights is plenty for most stores.
 
 ## 4. Heavy homepage sections
 
-Video backgrounds, Instagram feeds, review carousels, countdown timers, pop-ups. Each one is reasonable on its own, but together they slow the homepage to a crawl. Ask of each section: *does this help someone buy?* If not, it's costing you speed for nothing.
+Video backgrounds, Instagram feeds, review carousels, countdown timers, pop-ups. Each one can be reasonable on its own, but together they can slow the homepage noticeably. Ask of each section: *does this help someone buy?* If not, it's costing you speed for nothing.
 
 ## 5. Theme code that has grown over time
 
@@ -61,6 +62,6 @@ Stores that have been running for a few years often carry leftovers: old section
 
 ## The short version
 
-Compress your images, remove apps you don't use, keep fonts simple, trim the homepage and clean up old code. Do those five things and most stores go from frustrating to fast.
+Compress your images, remove apps you don't use, keep fonts simple, trim the homepage and clean up old code. Those are the five places I'd check first.
 
-If you'd like me to look at your store and tell you exactly what's slowing it down, [book a free meeting](/contact/). No obligation, just a clear list of what to fix first.
+If you'd like help working out what's slowing your store down, [book a free call](https://calendar.app.google/1wCbAVUgq2WPPDJk9). We'll talk through your store and the right next step, with no obligation.

@@ -1,28 +1,29 @@
 ---
-title: The pre-launch QA checklist I run on every Shopify store
+title: A pre-launch QA checklist for your Shopify store
 seoTitle: "Shopify Pre-Launch QA Checklist (Free)"
-description: The exact checklist I run before any Shopify store goes live, from checkout and shipping to emails, mobile layouts and the details customers notice.
-date: 2026-10-15
+description: A practical checklist to run before your Shopify store goes live, from checkout and shipping to emails, mobile layouts and the details customers notice.
+date: 2026-11-04
+updated: 2026-11-06
 cover: /Assets/shopify-store-mobile-testing-qa.webp
 coverAlt: Testing a Shopify store on a mobile phone before launch
 tags: [Testing, Shopify Tips]
 draft: false
 ---
 
-Launch day should feel exciting, not nerve-racking. The best way I know to get there is a proper QA pass, done calmly a few days *before* launch rather than in a panic the night before.
+Launch day should feel exciting, not nerve-racking. A good way to get there is a proper QA pass, done calmly a few days *before* launch rather than in a panic the night before.
 
-This is the checklist I use. Feel free to steal it.
+Feel free to use this checklist for your own store.
 
 ## 1. The money path
 
-This is the part I test first and most thoroughly.
+Test this part first and most thoroughly.
 
 - [ ] Add a product to the cart from the product page, the collection page and quick view (if your theme has it).
-- [ ] Change variants (size, colour) and quantities in the cart.
-- [ ] Place a real test order with **every** payment method you offer.
+- [ ] Change variants (size, color) and quantities in the cart.
+- [ ] Place a test order with **every** payment method you offer. Use Shopify's [test mode or Bogus Gateway](https://help.shopify.com/manual/checkout-settings/test-orders) first, then a real order for anything those can't cover.
 - [ ] Apply a working discount code, an expired one and a made-up one. The messages should make sense.
 - [ ] Check taxes and the final total against what you expect.
-- [ ] Refund or cancel the test order and confirm everything updates correctly.
+- [ ] Refund or cancel any real test order and confirm everything updates correctly. Check with your payment provider whether fees are returned.
 
 ## 2. Shipping
 
@@ -34,9 +35,9 @@ This is the part I test first and most thoroughly.
 
 ## 3. Emails customers receive
 
-Customers judge your brand by these more than you'd think.
+These emails are part of your brand too.
 
-- [ ] Order confirmation, shipping confirmation and delivery emails show your logo, colours and correct details.
+- [ ] Order confirmation, shipping confirmation and delivery emails show your logo, colors and correct details.
 - [ ] They look right on a phone.
 - [ ] Links inside them work and go to the right pages.
 - [ ] The reply-to address is one you actually check.
@@ -69,19 +70,19 @@ Customers judge your brand by these more than you'd think.
 
 - [ ] Homepage and product pages load quickly on mobile data.
 - [ ] Page titles and meta descriptions are written, not left as defaults.
-- [ ] The store is not still password-protected (it happens more than you'd think).
+- [ ] The store is not still password-protected.
 - [ ] Analytics and any tracking pixels are installed and firing.
 
 ## 8. After launch
 
-QA doesn't stop at launch. In the first week I watch for:
+QA doesn't stop at launch. In the first week, watch for:
 
 - abandoned checkouts that look unusual,
 - customer messages about anything confusing,
 - errors in the first real orders.
 
-Small issues caught in week one are easy to fix. The same issues ignored for a month become lost revenue.
+Small issues are easier to fix when you catch them early.
 
 ---
 
-It looks like a lot, but going through it properly usually takes a few focused hours. It's the best few hours you can spend before launch. If you'd rather hand it over to someone who does this every week, [I'm happy to help](/contact/).
+It looks like a lot, and the time depends on the size of your store, but it's time well spent before launch. If you'd rather hand it over to someone with a software testing background, [I'm happy to help](/contact/).
