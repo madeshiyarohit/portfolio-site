@@ -1,10 +1,11 @@
 ---
 title: "Reference: Brooklinen, turning trust signals into a sales tool"
+seoTitle: "Brooklinen Shopify Store Reference Study | Rohit Madeshiya"
 client: Brooklinen (reference only)
-summary: "A detailed look at brooklinen.com, a Shopify bedding and bath brand that sells a 'feel it first' product online by stacking guarantees, reviews, bundles and campaigns. Not my client work."
+summary: "How brooklinen.com, a Shopify bedding brand, sells a 'feel it first' product online with guarantees, reviews and bundles. Not my client work."
 date: 2026-10-25
-cover: /Assets/shopify-store-planning-conversion-optimization.webp
-coverAlt: Reference image of planning an online store's conversion features
+cover: /Assets/brooklinen-shopify-case-study-bedding-store.webp
+coverAlt: "Illustration for the Brooklinen Shopify case study: folded bedding beside a phone showing reviews and trust icons"
 industry: Home & Bedding
 services: [Conversion, Bundles, Trust Signals, Campaign Pages]
 liveUrl: https://www.brooklinen.com
@@ -28,7 +29,7 @@ draft: false
 | **Platform** | Shopify |
 | **Catalog (public sample)** | 250+ items: sheets, towels, blankets, robes, shams, duvet covers, quilts |
 | **Price range observed** | Up to about $740; typical items around $200 |
-| **Main product options** | Colour and size |
+| **Main product options** | Color and size |
 | **Apps spotted in the code** | Yotpo (reviews & loyalty), Attentive (SMS), Gladly (customer support), Swym (wishlist) |
 
 ## The challenge for a store like this
@@ -54,7 +55,7 @@ People like to touch bedding before buying it. Sheets and duvets are also higher
 
 ## Products and merchandising
 
-- Most products offer **colour and size**, sometimes extra options like weight or fill.
+- Most products offer **color and size**, sometimes extra options like weight or fill.
 - **Product families** (for example Dreamweave) group sets, covers and shams so shoppers can complete the look.
 - **"Last Call"** versions of products help clear old stock without discounting the main range.
 

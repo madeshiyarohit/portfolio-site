@@ -1,10 +1,11 @@
 ---
 title: "Reference: Ruggable, solving a real-life problem on the homepage"
+seoTitle: "Ruggable Shopify Store Reference Study | Rohit Madeshiya"
 client: Ruggable (reference only)
-summary: "A detailed look at ruggable.com, a Shopify home brand selling machine-washable, stain-resistant rugs for homes with kids and pets, and how it makes a bulky product easy to buy online. Not my client work."
+summary: "How ruggable.com, a Shopify store for washable rugs, speaks to homes with kids and pets and makes a bulky product easy to buy. Not my client work."
 date: 2026-09-16
-cover: /Assets/rohit-madeshiya-shopify-developer-at-work.webp
-coverAlt: Reference image of reviewing an online store at a laptop
+cover: /Assets/ruggable-shopify-case-study-washable-rugs-store.webp
+coverAlt: "Illustration for the Ruggable Shopify case study: dog resting on an unbranded rug with a phone showing a rug product page"
 industry: Home Decor
 services: [Problem-led Messaging, Promotions, Search & Filters, Custom Content Setup]
 liveUrl: https://www.ruggable.com
@@ -42,13 +43,13 @@ Rugs are big, visual and expensive-feeling purchases, and many people avoid nice
 
 ## Catalog and navigation
 
-- **Dedicated search and filtering tools** (Searchspring, Constructor) suggest a large catalog where filtering by size, colour, style and room matters a lot.
+- **Dedicated search and filtering tools** (Searchspring, Constructor) suggest a large catalog where filtering by size, color, style and room matters a lot.
 - **A content management system (Contentful)** lets the team build inspiration and campaign pages separately from products.
 
 ## Products and merchandising
 
 - Rugs come in many sizes and shapes, so **size selection** is a key part of the product page.
-- Style-led browsing (patterns, colours, rooms) helps people picture the rug at home.
+- Style-led browsing (patterns, colors, rooms) helps people picture the rug at home.
 
 ## Trust and conversion
 

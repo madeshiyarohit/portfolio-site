@@ -1,10 +1,11 @@
 ---
 title: "Reference: Gymshark, a store built around product drops and community"
+seoTitle: "Gymshark Shopify Store Reference Study | Rohit Madeshiya"
 client: Gymshark (reference only)
-summary: "A detailed look at gymshark.com, a fast-moving Shopify fitness apparel brand that merchandises by named collections, athlete collaborations and trends. Not my client work."
+summary: "How gymshark.com, a Shopify fitness apparel brand, merchandises with named collections, athlete collaborations and trends. Not my client work."
 date: 2026-09-28
-cover: /Assets/rohit-madeshiya-shopify-consultant-client-call.webp
-coverAlt: Reference image of discussing an online store strategy on a call
+cover: /Assets/gymshark-shopify-case-study-fitness-apparel-store.webp
+coverAlt: "Illustration for the Gymshark Shopify case study: folded unbranded workout sets beside a laptop showing a collection page"
 industry: Fitness Apparel
 services: [Merchandising, Collections, Campaigns, Custom Content Setup]
 liveUrl: https://www.gymshark.com
@@ -31,14 +32,14 @@ draft: false
 
 ## The challenge for a store like this
 
-Fitness apparel moves fast: new drops, limited colours and trends driven by athletes and social media. The store needs to launch collections quickly, keep returning visitors excited and still make it easy to find the right fit.
+Fitness apparel moves fast: new drops, limited colors and trends driven by athletes and social media. The store needs to launch collections quickly, keep returning visitors excited and still make it easy to find the right fit.
 
 ## Homepage walkthrough
 
 1. **Named product lines as heroes.** *SoftSense™* and *Vengeance* get top billing, with feature highlights like the *dipped waistband*.
 2. **Athlete collaboration.** A dedicated collaboration block connects products to people the audience follows.
 3. **Popular Right Now.** Trending products for shoppers who want to see what others are buying.
-4. **Lifestyle collections.** Loungewear and outfit sets (for example colour-matched gym sets) widen the reasons to buy.
+4. **Lifestyle collections.** Loungewear and outfit sets (for example color-matched gym sets) widen the reasons to buy.
 
 ## Catalog and navigation
 
@@ -48,7 +49,7 @@ Fitness apparel moves fast: new drops, limited colours and trends driven by athl
 ## Products and merchandising
 
 - Features (waistband styles, fabrics) are marketed like products in their own right.
-- **Sets and colour stories** encourage buying multiple pieces together.
+- **Sets and color stories** encourage buying multiple pieces together.
 - Trend sections update often to keep the homepage fresh.
 
 ## Trust and conversion

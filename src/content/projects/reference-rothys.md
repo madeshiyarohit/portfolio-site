@@ -1,10 +1,11 @@
 ---
 title: "Reference: Rothy's, making a practical benefit the hero"
+seoTitle: "Rothy's Shopify Store Reference Study | Rohit Madeshiya"
 client: Rothy's (reference only)
-summary: "A detailed look at rothys.com, a Shopify brand selling washable shoes and bags made with recycled materials, and how it handles a catalog with colour, size and width on every product. Not my client work."
+summary: "How rothys.com, a Shopify brand selling washable shoes and bags, handles color, size and width options across its catalog. Not my client work."
 date: 2026-10-08
-cover: /Assets/shopify-store-mobile-testing-qa.webp
-coverAlt: Reference image of browsing an online store on a phone
+cover: /Assets/rothys-shopify-case-study-washable-shoes-store.webp
+coverAlt: "Illustration for the Rothy's Shopify case study: unbranded knit flats in four colors beside devices showing product options"
 industry: Footwear & Accessories
 services: [Value Proposition, Variant Strategy, Search & Discovery, Testing]
 liveUrl: https://www.rothys.com
@@ -12,7 +13,7 @@ results:
   - { value: "Washable", label: "Key benefit stated in the homepage title" }
   - { value: "~$155", label: "Typical product price (median of public catalog)" }
   - { value: "~17", label: "Variants per product on average" }
-  - { value: "166", label: "Collections by style, colour, occasion and offer" }
+  - { value: "166", label: "Collections by style, color, occasion and offer" }
 reference: true
 draft: false
 ---
@@ -28,12 +29,12 @@ draft: false
 | **Platform** | Shopify |
 | **Catalog (public sample)** | 250+ products across flats, loafers, sneakers, Mary Janes, clogs and bags |
 | **Price range observed** | About $40–$375; typical items around $155 |
-| **Main product options** | Colour, size and (for some styles) width |
+| **Main product options** | Color, size and (for some styles) width |
 | **Apps spotted in the code** | Yotpo (reviews & loyalty), Gladly (support), Swym (wishlist), Intelligems (price & offer testing), Constructor (search), Shop Pay |
 
 ## The challenge for a store like this
 
-Rothy's sells premium-priced shoes in many styles, colours, sizes and widths, which means a lot of variants per product. The store needs to make one simple benefit stand out, help people find their exact style and fit, and justify the price.
+Rothy's sells premium-priced shoes in many styles, colors, sizes and widths, which means a lot of variants per product. The store needs to make one simple benefit stand out, help people find their exact style and fit, and justify the price.
 
 ## Homepage walkthrough
 
@@ -44,12 +45,12 @@ Rothy's sells premium-priced shoes in many styles, colours, sizes and widths, wh
 ## Catalog and navigation
 
 - **Product types are named after models** (The Point III, The Penny Loafer, The Almond Ballet, The Ivy Sneaker), so each style becomes a recognizable product line.
-- **166 collections** slice the catalog by style ("Clogs for All"), colour ("Black Shoes & Bags", "Blue Flats"), occasion ("Bridal Flats") and offer (for example gift-with-purchase on bags over a certain price).
+- **166 collections** slice the catalog by style ("Clogs for All"), color ("Black Shoes & Bags", "Blue Flats"), occasion ("Bridal Flats") and offer (for example gift-with-purchase on bags over a certain price).
 - **Dedicated search (Constructor)** helps shoppers navigate a large, variant-heavy catalog.
 
 ## Products and merchandising
 
-- Every product offers **colour**; most offer **size**; some add **width**, which helps a lot with fit and returns.
+- Every product offers **color**; most offer **size**; some add **width**, which helps a lot with fit and returns.
 - Material names (like ReVelvet™) become selling points in product titles.
 - **Kids' versions** of popular styles extend best sellers to new customers.
 
@@ -71,5 +72,5 @@ These are my own suggestions, not facts about the store:
 ## What this teaches for your own case studies
 
 - When a product has **one clear advantage**, show how the store puts it front and center.
-- Explain how you handled **complex variants** (colour × size × width) without confusing shoppers.
+- Explain how you handled **complex variants** (color × size × width) without confusing shoppers.
 - Mention **testing and data** (A/B tests, search), because it shows decisions were measured, not guessed.

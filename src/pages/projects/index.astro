@@ -7,20 +7,20 @@ import { getProjects } from "../../lib/content.js";
 const projects = await getProjects();
 const allRef = projects.length > 0 && projects.every(p => p.data.reference);
 const ld = [
-  { "@context": "https://schema.org", "@type": "CollectionPage", name: "Shopify Projects & Case Studies", url: new URL("/projects/", SITE.url).href,
+  { "@context": "https://schema.org", "@type": "CollectionPage", name: allRef ? "Shopify Reference Case Studies" : "Shopify Projects & Case Studies", url: new URL("/projects/", SITE.url).href,
     mainEntity: { "@type": "ItemList", itemListElement: projects.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.data.title, url: new URL(`/projects/${p.id}/`, SITE.url).href })) } },
   { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
     { "@type": "ListItem", position: 2, name: "Projects", item: new URL("/projects/", SITE.url).href } ] }
 ];
 ---
-<Base page="projects" title={`Shopify Projects & Case Studies | ${SITE.name}`}
-  description="Shopify stores designed, built, sped up and tested by Rohit Madeshiya. See what was done for each brand and the results."
+<Base page="projects" title={allRef ? `Shopify Reference Case Studies | ${SITE.name}` : `Shopify Projects & Case Studies | ${SITE.name}`}
+  description={allRef ? "Reference case studies of well-known Shopify stores: what they do well and what I'd test next. These are public-store reviews, not my client work." : "Shopify stores designed, built, sped up and tested by Rohit Madeshiya. See what was done for each brand and the results."}
   jsonLd={ld} noindex={projects.length === 0}>
   <header class="page-head">
     <div class="wrap">
       <ol class="crumbs reveal"><li><a href="/">Home</a></li><li aria-current="page">Projects</li></ol>
-      <h1 class="reveal">Selected <span class="serif hl">Work</span></h1>
+      <h1 class="reveal">{allRef ? <>Shopify <span class="serif hl">Case Studies</span></> : <>Selected <span class="serif hl">Work</span></>}</h1>
       <p class="lead reveal">{allRef ? "Case studies of well-known Shopify stores: what they do well, and what I'd test next." : "Real stores. Real brands. Built to look good and sell even better. Here's what I did for each one."}</p>
     </div>
   </header>

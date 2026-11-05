@@ -1,10 +1,11 @@
 ---
 title: "Reference: Death Wish Coffee, a bold brand that sells through personality"
+seoTitle: "Death Wish Coffee Shopify Reference Study | Rohit Madeshiya"
 client: Death Wish Coffee (reference only)
-summary: "A detailed look at deathwishcoffee.com, a Shopify coffee brand that combines limited drops, merch, bundles, subscriptions and rewards to turn coffee buyers into repeat fans. Not my client work."
+summary: "How deathwishcoffee.com, a Shopify coffee brand, uses limited drops, bundles, subscriptions and rewards to earn repeat buyers. Not my client work."
 date: 2026-10-18
-cover: /Assets/shopify-developer-night-desk-setup.webp
-coverAlt: Reference image of a moody desk setup with coffee and a laptop
+cover: /Assets/death-wish-coffee-shopify-case-study-coffee-store.webp
+coverAlt: "Illustration for the Death Wish Coffee Shopify case study: unbranded coffee bag, mug and phone showing a dark store page"
 industry: Food & Drink
 services: [Subscriptions, Bundles, Limited Drops, Retention]
 liveUrl: https://www.deathwishcoffee.com

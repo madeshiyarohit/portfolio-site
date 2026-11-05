@@ -1,10 +1,11 @@
 ---
 title: "Reference: Allbirds, comfort and sustainability at the center of the store"
+seoTitle: "Allbirds Shopify Store Reference Study | Rohit Madeshiya"
 client: Allbirds (reference only)
-summary: "A detailed look at allbirds.com, a large Shopify footwear store, and how it organizes a big catalog, reduces the risk of buying shoes online and keeps the brand story light. Not my client work."
+summary: "How allbirds.com, a large Shopify footwear store, organizes a big catalog and reduces the risk of buying shoes online. Not my client work."
 date: 2026-11-01
-cover: /Assets/shopify-store-design-laptop-and-mobile.webp
-coverAlt: Reference image of an online shoe store on a laptop and phone
+cover: /Assets/allbirds-shopify-case-study-footwear-store.webp
+coverAlt: "Illustration for the Allbirds Shopify case study: unbranded wool sneakers beside a tablet showing a simple store layout"
 industry: Footwear & Apparel
 services: [Catalog Structure, Product Discovery, Returns Experience, Brand Storytelling]
 liveUrl: https://www.allbirds.com
@@ -34,7 +35,7 @@ draft: false
 
 ## The challenge for a store like this
 
-Buying shoes online is risky for the customer: *Will they fit? Will they be comfortable?* On top of that, Allbirds sells the same models in many colours and sole combinations, for men and women. The store has to keep a big, repetitive catalog easy to browse while convincing people to buy without trying the shoes on.
+Buying shoes online is risky for the customer: *Will they fit? Will they be comfortable?* On top of that, Allbirds sells the same models in many colors and sole combinations, for men and women. The store has to keep a big, repetitive catalog easy to browse while convincing people to buy without trying the shoes on.
 
 ## Homepage walkthrough
 
@@ -45,8 +46,8 @@ Buying shoes online is risky for the customer: *Will they fit? Will they be comf
 
 ## Catalog and navigation
 
-- **Product names carry the details.** Titles follow a clear pattern: *audience + model + colour + sole*, for example "Women's Cruiser Jersey - Soft Eucalyptus (Blizzard Sole)". This makes search and filtering work well.
-- **Each colour is its own product.** Instead of one product with 20 colour variants, colours are separate products. That gives every colourway its own page, photos and reviews, and it's great for search engines.
+- **Product names carry the details.** Titles follow a clear pattern: *audience + model + color + sole*, for example "Women's Cruiser Jersey - Soft Eucalyptus (Blizzard Sole)". This makes search and filtering work well.
+- **Each color is its own product.** Instead of one product with 20 color variants, colors are separate products. That gives every colorway its own page, photos and reviews, and it's great for search engines.
 - **Collections do a lot of work.** 250+ collections (including sale and campaign collections) let the team build landing pages for any audience, promotion or season without changing the site structure.
 
 ## Products and merchandising

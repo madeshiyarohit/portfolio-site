@@ -28,7 +28,7 @@ const ld = [
 ];
 ---
 <Base page="project" type="article" title={d.seoTitle || `${d.title}: Shopify Case Study`} description={d.summary}
-  image={d.cover} imageAlt={d.coverAlt || d.title} jsonLd={ld} noindex={d.draft}>
+  image={d.cover} preloadImage={d.cover} imageAlt={d.coverAlt || d.title} jsonLd={ld} noindex={d.draft}>
   <article>
     <header class="page-head">
       <div class="wrap">
