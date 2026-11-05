@@ -13,7 +13,7 @@ export async function GET() {
 > ${P.name} is a freelance Shopify consultant, developer and QA tester who builds fast, conversion-focused Shopify stores for brands worldwide, and tests every store on every device before launch. Former software tester at Deloitte (banking and healthcare applications). Works 100% remotely; replies within 24 hours.
 
 ## Services
-${P.services.map(s => `- ${s.title} (from ${s.price}, delivery in ${s.delivery}): ${s.text} Includes: ${s.features.join("; ")}.`).join("\n")}
+${P.services.map(s => `- ${s.title} (from ${s.price}${s.hourly ? ` or ${s.hourly} per hour` : ""}, delivery in ${s.delivery}): ${s.text} Includes: ${s.features.join("; ")}.`).join("\n")}
 
 ## Contact
 - Book a free call: ${P.bookingUrl}

@@ -235,6 +235,7 @@ const ICON_LOOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
             <h3>{s.title}</h3>
             <p>{s.text}</p>
             <div class="price"><small>From</small><b>{s.price}</b></div>
+            <div class="price-alt">{s.hourly && <>or <b>{s.hourly}</b> per hour</>}</div>
             {(s.delivery || s.revisions) && <div class="svc-meta">
               {s.delivery && <span><Fragment set:html={ICON_CLOCK} />Delivery in {s.delivery}</span>}
               {s.revisions && <span><Fragment set:html={ICON_LOOP} />{s.revisions}</span>}

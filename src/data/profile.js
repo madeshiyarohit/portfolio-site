@@ -130,21 +130,21 @@ export const PROFILE = {
   // ico: "design" | "speed" | "rocket". featured: true highlights the card with a "Most Popular" badge.
   // delivery, revisions and support appear under the price on each card.
   services: [
-    { ico: "design", title: "Shopify Store Design", text: "A store that looks great and feels true to your brand.", price: "$199",
+    { ico: "design", title: "Shopify Store Design", text: "A store that looks great and feels true to your brand.", price: "$499",
       delivery: "5–7 days", revisions: "2 revision rounds",
-      features: ["Custom homepage & product pages", "Mobile-first, on-brand layouts", "Colors, fonts & sections set up", "Tested on phone, tablet & desktop"] },
-    { ico: "speed", title: "Shopify Speed & Fixes", text: "Make your store faster and fix what's broken.", price: "$129", featured: true,
+      features: ["Custom homepage design", "Product & collection page layouts", "Mobile-first design for every page", "Brand colors, fonts & visual style", "Layouts that guide shoppers to buy"] },
+    { ico: "speed", title: "Shopify Speed & Fixes", text: "Make your store faster and fix what's broken.", price: "$400", hourly: "$20", featured: true,
       delivery: "3–5 days", revisions: "Re-tested until fixed",
-      features: ["Speed audit & optimization", "Bug, layout & checkout fixes", "Before & after speed report", "Tested across devices"] },
-    { ico: "rocket", title: "Full Shopify Store Build", text: "Everything from setup to launch, done for you.", price: "$600",
+      features: ["Speed audit with clear priorities", "Image, app & code optimization", "Bug, layout & checkout fixes", "Before & after speed report", "Every fix re-tested across devices"] },
+    { ico: "rocket", title: "Full Shopify Store Build", text: "Everything from setup to launch, done for you.", price: "$1,200", hourly: "$30",
       delivery: "2–3 weeks", revisions: "3 revision rounds",
-      features: ["Theme setup & customization", "Payments, shipping & apps", "Full QA on every device", "14 days of support after launch"] }
+      features: ["Store setup & theme customization", "Up to 20 products added", "Payments & shipping set up", "Essential apps installed", "Full QA on every device", "Launch + 14 days of support"] }
   ],
   // The three steps shown under the pricing cards.
   nextSteps: [
     { title: "Book a free call", text: "A free 15-minute call about your store, your goals and your timeline." },
-    { title: "Get a clear plan", text: "Within 24 hours you get a fixed price, a delivery date and exactly what's included." },
-    { title: "Work begins", text: "Updates every few days, nothing goes live without your approval, and every page is tested first." }
+    { title: "Get a clear plan", text: "Within 24 hours you get a clear price, a delivery date and exactly what's included." },
+    { title: "Work begins", text: "Updates every few days, nothing goes live without your approval, and everything I build or fix is tested first." }
   ],
   responseTime: "I reply to every message within 24 hours.",
   payments: ["Fiverr", "PayPal", "Payoneer", "Wise", "Bank Transfer"],

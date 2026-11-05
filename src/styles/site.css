@@ -364,6 +364,8 @@ kbd { font: 700 11px/1 var(--font); padding: 5px 7px; border-radius: 7px; backgr
 .svc .price { display: flex; align-items: baseline; gap: 8px; padding-top: 6px; }
 .svc .price small { font-size: 12px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
 .svc .price b { font-size: 46px; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
+.svc .price-alt { min-height: 20px; margin-top: -6px; font-size: 14px; line-height: 20px; color: var(--muted); }
+.svc .price-alt b { color: var(--ink); font-weight: 700; }
 .svc ul { list-style: none; margin: 0; padding: 20px 0 0; border-top: 1px solid var(--line); display: grid; gap: 11px; flex: 1; align-content: start; }
 .svc li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; }
 .svc li svg { width: 19px; height: 19px; flex: none; color: var(--accent); margin-top: 1px; }
@@ -386,7 +388,7 @@ kbd { font: 700 11px/1 var(--font); padding: 5px 7px; border-radius: 7px; backgr
 .pay-item { display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px 8px 9px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); font-size: 13.5px; font-weight: 700; transition: transform .25s var(--ease), border-color .25s; }
 .pay-item svg { width: 26px; height: 26px; border-radius: 7px; flex: none; }
 @media (hover: hover) { .pay-item:hover { transform: translateY(-2px); border-color: var(--line2); } }
-@media (max-width: 960px) { .services { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; gap: 28px; } .svc.featured { transform: none; } }
+@media (max-width: 960px) { .svc .price-alt:empty { display: none; } .services { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; gap: 28px; } .svc.featured { transform: none; } }
 
 /* Beyond the work: text on one side, a photo mosaic on the other */
 .beyond { display: grid; gap: 18px; }
