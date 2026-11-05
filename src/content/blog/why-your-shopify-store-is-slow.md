@@ -4,8 +4,8 @@ seoTitle: "Why Your Shopify Store Is Slow (and How to Fix It)"
 description: Speed scores can be confusing. Here are the usual reasons a Shopify store feels slow, and the fixes worth checking first.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/shopify-theme-development-coding.webp
-coverAlt: Shopify theme code open on a laptop during a speed optimization
+cover: /Assets/shopify-store-speed-optimization-phone-and-gauge.webp
+coverAlt: Fully loaded Shopify store product page on a phone beside a speed gauge pointing to fast
 tags: [Speed, Shopify Tips]
 draft: false
 ---

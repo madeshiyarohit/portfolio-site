@@ -4,8 +4,8 @@ seoTitle: "Shopify Product Pages That Sell: A Simple Structure"
 description: A product page has one job, to help the right person feel confident enough to buy. Here's a simple structure, section by section.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/shopify-store-planning-conversion-optimization.webp
-coverAlt: Planning a Shopify product page layout with sticky notes
+cover: /Assets/shopify-product-page-mobile-anatomy.webp
+coverAlt: Shopify product page on a phone with callouts on the product photo, reviews and Add to Cart button
 tags: [Conversion, Design]
 draft: false
 ---

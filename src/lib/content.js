@@ -6,7 +6,7 @@ const visible = e => showDrafts || !e.data.draft;
 const newestFirst = (a, b) => b.data.date - a.data.date;
 
 export async function getPosts() {
-  return (await getCollection("blog", visible)).sort(newestFirst);
+  return (await getCollection("blog", visible)).sort((a, b) => (b.data.featured - a.data.featured) || newestFirst(a, b));
 }
 export async function getProjects() {
   return (await getCollection("projects", visible)).sort((a, b) => (b.data.featured - a.data.featured) || newestFirst(a, b));

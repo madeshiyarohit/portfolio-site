@@ -4,8 +4,8 @@ seoTitle: "9 Questions to Ask Before Hiring a Shopify Developer"
 description: Hiring the wrong developer is expensive and stressful. Ask these nine questions first, and you'll quickly see who will actually take care of your store.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/rohit-madeshiya-shopify-consultant-client-call.webp
-coverAlt: A Shopify consultant on a video call with a client
+cover: /Assets/hiring-shopify-developer-video-call.webp
+coverAlt: Video call with a boutique owner on a laptop beside a notebook list of questions for hiring a Shopify developer
 tags: [Hiring, Shopify Tips]
 draft: false
 ---

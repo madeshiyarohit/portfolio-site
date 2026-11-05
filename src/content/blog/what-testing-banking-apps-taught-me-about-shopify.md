@@ -4,8 +4,8 @@ seoTitle: "What Testing Banking Apps Taught Me About Shopify"
 description: Before I built Shopify stores, I tested banking and healthcare software at Deloitte. Here are the testing habits that carry over to an online store.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/rohit-madeshiya-shopify-developer-at-work.webp
-coverAlt: Rohit Madeshiya testing a Shopify store at a desk
+cover: /Assets/shopify-developer-testing-store-on-phone.webp
+coverAlt: Shopify developer testing an online store on a phone beside a laptop showing passed test checks
 tags: [Testing, Behind the Scenes]
 featured: true
 draft: false

@@ -33,7 +33,7 @@ const withName = t => (t.length + SITE.name.length + 3 <= 62 ? `${t} | ${SITE.na
 const shareUrl = encodeURIComponent(url);
 ---
 <Base page="post" type="article" title={withName(d.seoTitle || d.title)} description={d.description}
-  image={d.cover || SITE.shareImage} imageAlt={d.coverAlt || d.title} published={d.date} modified={d.updated} jsonLd={ld} noindex={d.draft}>
+  image={d.cover || SITE.shareImage} preloadImage={d.cover} imageAlt={d.coverAlt || d.title} published={d.date} modified={d.updated} jsonLd={ld} noindex={d.draft}>
   <article>
     <header class="page-head">
       <div class="wrap">

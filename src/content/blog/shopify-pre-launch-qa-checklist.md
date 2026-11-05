@@ -4,8 +4,8 @@ seoTitle: "Shopify Pre-Launch QA Checklist (Free)"
 description: A practical checklist to run before your Shopify store goes live, from checkout and shipping to emails, mobile layouts and the details customers notice.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/shopify-store-mobile-testing-qa.webp
-coverAlt: Testing a Shopify store on a mobile phone before launch
+cover: /Assets/shopify-pre-launch-qa-checklist-on-devices.webp
+coverAlt: Shopify store shown on a laptop, tablet and phone beside a pre-launch QA checklist
 tags: [Testing, Shopify Tips]
 draft: false
 ---

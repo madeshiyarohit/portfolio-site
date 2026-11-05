@@ -4,8 +4,8 @@ seoTitle: "Free vs Paid Shopify Themes: How to Choose"
 description: Your theme shapes your store's speed, design and running costs for years. Here's how to choose without getting dazzled by demo stores.
 date: 2026-11-04
 updated: 2026-11-06
-cover: /Assets/shopify-store-design-laptop-and-mobile.webp
-coverAlt: A Shopify theme shown on a laptop and a smartphone
+cover: /Assets/choosing-shopify-theme-layout-comparison.webp
+coverAlt: Three Shopify theme layouts compared side by side, with the middle design taped as the chosen one
 tags: [Design, Shopify Tips]
 draft: false
 ---
